@@ -4,6 +4,8 @@ import Header from "../components/Header"
 import Hero from "../components/Hero"
 import Banner from "../components/Banner"
 import FeaturedLessons from "../components/FeaturedLessons"
+import FeaturedArticles from "../components/FeaturedArticles"
+import Footer from "../components/Footer"
 
 export default class Index extends React.Component {
   static async getInitialProps() {
@@ -39,7 +41,3 @@ export default class Index extends React.Component {
 }
 
 const LearnMore = props => <section>learn more</section>
-
-const FeaturedArticles = props => <section>FeaturedArticles</section>
-
-const Footer = props => <footer>footer</footer>
