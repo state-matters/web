@@ -1,9 +1,8 @@
 import React from "react"
 import styled from "styled-components"
-import theme from "theme"
 import Swipeable from "react-swipeable"
 
-const StyledScroller = styled.section`
+const SliderWrapper = styled.section`
   position: relative;
   width: 100%;
   overflow: hidden;
@@ -13,17 +12,6 @@ const StyledScroller = styled.section`
   .inner-wrapper {
     display: flex;
     transition: transform 300ms;
-  }
-  .outer-wrapper .arrows {
-    display: flex;
-    justify-content: flex-end;
-    .mdi {
-      font-size: 4rem;
-      cursor: pointer;
-      &:hover {
-        color: ${theme.colors.grey["500"]};
-      }
-    }
   }
   .item {
     flex: 0 0 100%;
@@ -74,10 +62,10 @@ export default class extends React.Component {
       }
     })
   render = () => {
-    const { children, ...props } = this.props
+    const { children, basis } = this.props
     return (
       <Swipeable onSwiped={this.handleSwipe} trackMouse={true}>
-        <StyledScroller {...props}>
+        <SliderWrapper basis={basis}>
           <div className="outer-wrapper container">
             <div
               className="inner-wrapper"
@@ -90,18 +78,8 @@ export default class extends React.Component {
                 <div className="item">{child}</div>
               ))}
             </div>
-            <div className="arrows">
-              <span
-                className="mdi mdi-chevron-left"
-                onClick={e => this.handleSwipe(e, -1)}
-              />
-              <span
-                className="mdi mdi-chevron-right"
-                onClick={e => this.handleSwipe(e, 1)}
-              />
-            </div>
           </div>
-        </StyledScroller>
+        </SliderWrapper>
       </Swipeable>
     )
   }

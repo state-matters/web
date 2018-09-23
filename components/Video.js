@@ -1,69 +1,84 @@
-import React from "react"
+import React, { Fragment } from "react"
 import styled from "styled-components"
-import PropTypes from "prop-types"
-import { Play } from "react-feather"
-import Modal from "./Modal"
+import { createPortal } from "react-dom"
+import { colors } from "../constants"
 
-const StyledVideo = styled.figure`
-  position: relative;
-  margin: 0;
-  .video__inner {
-    padding-bottom: ${({ ratio = 100 }) => `${ratio}%`};
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.48), rgba(0, 0, 0, 0.48)),
-      url(${({ background }) => background});
+export default class Video extends React.Component {
+  state = { open: false }
+  handleToggle = () =>
+    this.setState(state => {
+      document.body.classList.toggle("no-scroll")
+      return { open: !state.open }
+    })
+  render = () => {
+    return (
+      <Fragment>
+        <VideoModal open={this.state.open} toggle={this.handleToggle}>
+          <VideoPlayer
+            src={this.props.src}
+            controls
+            preload="auto"
+            onClick={e => e.stopPropagation()}
+          />
+        </VideoModal>
+        <VideoPoster poster={this.props.poster}>
+          <i className="mdi mdi-play" onClick={this.handleToggle} />
+        </VideoPoster>
+      </Fragment>
+    )
   }
-  .video__play-btn {
+}
+
+class VideoModal extends React.Component {
+  mountPoint = null
+  componentDidMount = () => {
+    this.mountPoint = document.createElement("aside")
+    document.body.appendChild(this.mountPoint)
+  }
+  render = () =>
+    this.props.open &&
+    createPortal(
+      <ModalBackground onClick={this.props.toggle}>
+        {this.props.children}
+      </ModalBackground>,
+      this.mountPoint
+    )
+}
+
+const VideoPlayer = styled.video`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  width: 100%;
+  max-width: 80rem;
+  box-shadow: 0 4rem 4rem -2rem rgba(32, 30, 29, 0.96);
+`
+
+const ModalBackground = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(32, 30, 29, 0.6);
+`
+
+const VideoPoster = styled.div`
+  padding-bottom: 100%;
+  background: linear-gradient(rgba(32, 30, 29, 0.48), rgba(32, 30, 29, 0.48)),
+    url(${({ poster }) => poster});
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+  .mdi {
     position: absolute;
     top: 50%;
     left: 50%;
+    color: ${colors.grey_100};
+    font-size: 4rem;
     transform: translate3d(-50%, -50%, 0);
     cursor: pointer;
   }
 `
-
-const VideoModal = styled.video`
-  max-width: 100%;
-`
-
-export default class Video extends React.Component {
-  static propsTypes = {
-    poster: PropTypes.string,
-    url: PropTypes.string
-  }
-  video = null
-  state = {
-    playing: false
-  }
-  render = _ => {
-    const { poster, url, ...props } = this.props
-    return (
-      <Modal
-        body={
-          <VideoModal
-            controls
-            src={this.props.url}
-            poster={this.props.poster}
-            ref={node => (this.video = node)}
-          />
-        }
-        render={toggle => (
-          <StyledVideo {...props} background={this.props.poster}>
-            <div className="video__inner">
-              {this.props.playButton && (
-                <Play
-                  className="video__play-btn"
-                  size={48}
-                  onClick={toggle}
-                  color="white"
-                />
-              )}
-            </div>
-          </StyledVideo>
-        )}
-      />
-    )
-  }
-}

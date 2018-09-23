@@ -1,11 +1,11 @@
 import { withRouter } from "next/router"
 
 const Lessons = ({ router }) => {
-  return <h1>Hello {router.query.id}</h1>
+  console.log(router)
+  return <h1>Hello there</h1>
 }
 
-Lessons.getInitialProps = async ctx => {
-  console.log(ctx)
+Lessons.getInitialProps = async () => {
   return {}
 }
 

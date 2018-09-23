@@ -1,137 +1,43 @@
+import { Fragment } from "react"
+import client from "../createContentfulClient"
+import Header from "../components/Header"
 import Hero from "../components/Hero"
-import { colors } from "../constants"
-import Card from "../components/Card"
-import theme from "../components/theme"
+import Banner from "../components/Banner"
+import FeaturedLessons from "../components/FeaturedLessons"
+import FeaturedArticles from "../components/FeaturedArticles"
+import Footer from "../components/Footer"
 
-export default props => (
-  <main>
-    <Hero />
-    <Card />
+export default class Index extends React.Component {
+  static async getInitialProps() {
+    const getArticles = client.getEntries({
+      "sys.id": "4MfPGGWjhYOmgcUSCSAsMq"
+    })
+    const getLessons = client.getEntries({
+      "sys.id": "1Y3i4UENnea8eWu04WOsok"
+    })
+    const [articles, lessons] = await Promise.all([getArticles, getLessons])
+    return {
+      articles: articles.items[0].fields.entries,
+      lessons: lessons.items[0].fields.entries,
+      banner: {
+        text: "# hello world"
+      }
+    }
+  }
+  render() {
+    const { banner, lessons, articles } = this.props
+    return (
+      <Fragment>
+        <Header />
+        <Hero />
+        <Banner text={banner.text} />
+        <FeaturedLessons lessons={lessons} />
+        <LearnMore />
+        <FeaturedArticles articles={articles} />
+        <Footer />
+      </Fragment>
+    )
+  }
+}
 
-    <style global jsx>{`
-      *,
-      *:before,
-      *:after {
-        box-sizing: border-box;
-      }
-
-      :root {
-        font-size: 75%; // 12px
-      }
-
-      html,
-      body {
-        width: 100%;
-        height: 100%;
-      }
-
-      body {
-        position: relative;
-        margin: 0;
-        padding: 0;
-        background-color: ${theme.colors.grey["100"]};
-        color: ${theme.colors.grey["900"]};
-        font-family: "Poppins", Arial, sans-serif;
-        font-size: 1.5rem; // 18px
-        line-height: 1.33333; // 24px
-        overflow-x: hidden;
-      }
-      body.no-scroll {
-        overflow: hidden;
-      }
-
-      h1, h2, h3, h4 , h5, p {
-        margin: 0;
-      }
-
-      h1,
-      h2,
-      h3 {
-        font-family: "Martel", serif;
-      }
-
-      h1,
-      .hero {
-        font-size: 5rem;
-        font-weight: 200;
-      }
-
-      h2,
-      .headline {
-        font-size: 3.5rem;
-        font-weight: 200;
-        color: ${theme.colors.grey["500"]};
-      }
-
-      h3,
-      .title {
-        font-size: 3rem;
-        font-weight: 300;
-      }
-
-      h4,
-      .subtitle {
-        font-size: 2rem;
-        font-weight: 500;
-      }
-
-      .small {
-        font-size: 1rem;
-        line-height: 2;
-      }
-
-      .container {
-        width: 100%;
-        max-width: 105rem;
-        margin: 0 auto;
-      }
-
-      .card {
-        background: ${theme.colors.grey["100"]};
-        padding: 1rem;
-        box-shadow: 0 12px 12px -12px rgba(0,0,0,0.12);
-      }
-
-      .btn:hover {
-        background-color: ${theme.colors.grey["900"]}};
-        color: ${theme.colors.grey["100"]}};
-      }
-
-      @media (min-width: ${theme.breakPoints.sm}) {
-        h1,
-      .hero {
-        font-size: 5rem;
-      }
-
-      h2,
-      .headline {
-        font-size: 3.5rem;
-      }
-
-      h3,
-      .title {
-        font-size: 3rem;
-      }
-
-      h4,
-      .subtitle {
-        font-size: 2rem;
-      }
-
-      .small {
-        font-size: 1rem;
-        line-height: 2;
-      }
-      }
-
-      @media (min-width: ${theme.breakPoints.lg}) {
-      }
-
-      @media (min-width: 105rem) {
-        .container {
-          padding: 0;
-        }
-      }
-    `}</style>
-  </main>
-)
+const LearnMore = props => <section>learn more</section>
