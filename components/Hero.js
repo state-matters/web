@@ -1,10 +1,7 @@
+import Card from "./Card"
+
 export default props => (
   <section className="hero">
-    <h1>Hello Hero Page</h1>
-    <style jsx>{`
-      .hero {
-        color: blue;
-      }
-    `}</style>
+    <Card>Hello world</Card>
   </section>
 )

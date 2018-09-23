@@ -1,33 +1,41 @@
+import { Fragment } from "react"
 import Hero from "../components/Hero"
-import { colors } from "../constants"
 import client from "../createContentfulClient"
 
 export default class Index extends React.Component {
   static async getInitialProps() {
-    const data = await client.getEntries()
-    return { data }
+    const getArticles = client.getEntries({
+      "sys.id": "4MfPGGWjhYOmgcUSCSAsMq"
+    })
+    const getLessons = client.getEntries({
+      "sys.id": "1Y3i4UENnea8eWu04WOsok"
+    })
+    const [articles, lessons] = await Promise.all([getArticles, getLessons])
+    return {
+      articles: articles.items[0].fields.entries,
+      lessons: lessons.items[0].fields.entries
+    }
   }
   render() {
     return (
-      <main>
+      <Fragment>
+        <Header />
         <Hero />
-
-        <style global jsx>{`
-          * {
-            box-sizing: border-box;
-          }
-          :root {
-            font-size: 75%;
-          }
-          body {
-            margin: 0;
-            padding: 0;
-            font-size: 1.5rem;
-            font-family: "IBM Plex Mono", monospace;
-            background: ${colors.grey_100};
-          }
-        `}</style>
-      </main>
+        <Banner />
+        <FeaturedLessons lessons={this.props.lessons} />
+        <FeaturedArticles articles={this.props.articles} />
+        <Footer />
+      </Fragment>
     )
   }
 }
+
+const Header = props => <header>header</header>
+
+const Banner = props => <aside>Banner</aside>
+
+const FeaturedLessons = props => <section>FeaturedLessons</section>
+
+const FeaturedArticles = props => <section>FeaturedArticles</section>
+
+const Footer = props => <footer>Footer</footer>

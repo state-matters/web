@@ -4,8 +4,7 @@ const Lessons = ({ router }) => {
   return <h1>Hello {router.query.id}</h1>
 }
 
-Lessons.getInitialProps = async ctx => {
-  console.log(ctx)
+Lessons.getInitialProps = async () => {
   return {}
 }
 
