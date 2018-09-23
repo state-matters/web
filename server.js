@@ -13,10 +13,10 @@ const serve = () => {
   const server = express()
   server.use(compression())
   server.get("/l/:lesson_id", (req, res) =>
-    app.render(req, res, "/lessons", { id: req.params.lesson_id })
+    app.render(req, res, "/lessons/show", { id: req.params.lesson_id })
   )
   server.get("/a/:article_id", (req, res) =>
-    app.render(req, res, "/articles", { id: req.params.lesson_id })
+    app.render(req, res, "/articles/show", { id: req.params.article_id })
   )
   server.get("*", handler)
   server.listen(port, err => {

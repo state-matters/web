@@ -60,7 +60,7 @@ const StyledFooter = styled.footer`
   }
 `
 
-const FooterLink = styled(Link)`
+const FooterLink = styled.a`
   color: ${colors.grey_700};
   font-family: "Martel", serif;
   font-size: 3rem;
@@ -80,16 +80,25 @@ export default class Footer extends React.Component {
       <StyledFooter>
         <div className="left">
           <div className="content">
+            <Link href="/">
+              <FooterLink>
+                <h3>StateMatters.org</h3>
+              </FooterLink>
+            </Link>
             <FooterLink href="/">
               <h3>StateMatters.org</h3>
             </FooterLink>
             <h4>Chicago, IL</h4>
             <ul>
               <li>
-                <FooterLink to="/about">About</FooterLink>
+                <Link href="/about">
+                  <FooterLink>About</FooterLink>
+                </Link>
               </li>
               <li>
-                <FooterLink to="/articles">Articles</FooterLink>
+                <Link href="/articles">
+                  <FooterLink>Articles</FooterLink>
+                </Link>
               </li>
             </ul>
           </div>

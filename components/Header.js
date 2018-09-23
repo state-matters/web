@@ -5,10 +5,18 @@ export default () => {
   return (
     <Header>
       <nav>
-        <Link to="/">Home</Link>
-        <Link to="/about">About</Link>
-        <Link to="/articles">Articles</Link>
-        <Link to="/lessons">Lessons</Link>
+        <Link href="/">
+          <a>Home</a>
+        </Link>
+        <Link href="/about">
+          <a>About</a>
+        </Link>
+        <Link href="/articles">
+          <a>Articles</a>
+        </Link>
+        <Link href="/lessons">
+          <a>Lessons</a>
+        </Link>
       </nav>
     </Header>
   )

@@ -12,8 +12,10 @@ const Hero = props => {
             We clarify Illinois government with short videos & helpful summaries
             on the issues that matter to you!
           </h1>
-          <Link className="hero__link" color={colors.grey_100} to="/about">
-            Learn more about us
+          <Link href="/about">
+            <a className="hero__link" color={colors.grey_100}>
+              Learn more about us
+            </a>
           </Link>
         </Column>
       </Grid>
