@@ -27,6 +27,7 @@ export default class MyDocument extends Document {
     return (
       <html>
         <Head>
+          <link rel="stylesheet" href="/static/base.css" />
           {this.props.styleTags}
           <meta name="og:title" content={this.props.result} />
         </Head>
