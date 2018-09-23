@@ -1,9 +1,11 @@
 import Hero from "../components/Hero"
 import { colors } from "../constants"
+import Card from "../components/Card"
 
 export default props => (
   <main>
     <Hero />
+    <Card />
 
     <style global jsx>{`
       * {
