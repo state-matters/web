@@ -1,6 +1,9 @@
 import { Fragment } from "react"
-import Hero from "../components/Hero"
 import client from "../createContentfulClient"
+import Header from "../components/Header"
+import Hero from "../components/Hero"
+import Banner from "../components/Banner"
+import FeaturedLessons from "../components/FeaturedLessons"
 
 export default class Index extends React.Component {
   static async getInitialProps() {
@@ -13,29 +16,30 @@ export default class Index extends React.Component {
     const [articles, lessons] = await Promise.all([getArticles, getLessons])
     return {
       articles: articles.items[0].fields.entries,
-      lessons: lessons.items[0].fields.entries
+      lessons: lessons.items[0].fields.entries,
+      banner: {
+        text: "# hello world"
+      }
     }
   }
   render() {
+    const { banner, lessons, articles } = this.props
     return (
       <Fragment>
         <Header />
         <Hero />
-        <Banner />
-        <FeaturedLessons lessons={this.props.lessons} />
-        <FeaturedArticles articles={this.props.articles} />
+        <Banner text={banner.text} />
+        <FeaturedLessons lessons={lessons} />
+        <LearnMore />
+        <FeaturedArticles articles={articles} />
         <Footer />
       </Fragment>
     )
   }
 }
 
-const Header = props => <header>header</header>
-
-const Banner = props => <aside>Banner</aside>
-
-const FeaturedLessons = props => <section>FeaturedLessons</section>
+const LearnMore = props => <section>learn more</section>
 
 const FeaturedArticles = props => <section>FeaturedArticles</section>
 
-const Footer = props => <footer>Footer</footer>
+const Footer = props => <footer>footer</footer>
