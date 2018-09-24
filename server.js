@@ -4,14 +4,14 @@ const express = require("express")
 const next = require("next")
 const compression = require("compression")
 
-const dev = process.env.NODE_ENV !== "production"
-const app = next({ dev })
+const isDev = process.env.NODE_ENV !== "production"
+const app = next({ dev: isDev })
 const handler = app.getRequestHandler()
 const port = process.env.PORT || 3000
 
 const serve = () => {
   const server = express()
-  server.use(compression())
+  if (!isDev) server.use(compression())
   server.get("/l/:lesson_id", (req, res) =>
     app.render(req, res, "/lessons/show", { id: req.params.lesson_id })
   )
