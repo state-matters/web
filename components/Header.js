@@ -1,28 +1,25 @@
-import styled, { css } from "styled-components"
+import styled from "styled-components"
 import Link from "next/link"
 import { withRouter } from "next/router"
 
-const Header = ({ router }) => {
-  console.log(router)
-  return (
-    <HeaderWrapper isHome={router.pathname === "/"}>
-      <nav>
-        <Link href="/">
-          <a>Home</a>
-        </Link>
-        <Link href="/about">
-          <a>About</a>
-        </Link>
-        <Link href="/articles">
-          <a>Articles</a>
-        </Link>
-        <Link href="/lessons">
-          <a>Lessons</a>
-        </Link>
-      </nav>
-    </HeaderWrapper>
-  )
-}
+const Header = ({ router }) => (
+  <HeaderWrapper isHome={router.pathname === "/"}>
+    <nav>
+      <Link href="/">
+        <a>Home</a>
+      </Link>
+      <Link href="/about">
+        <a>About</a>
+      </Link>
+      <Link href="/articles">
+        <a>Articles</a>
+      </Link>
+      <Link href="/lessons">
+        <a>Lessons</a>
+      </Link>
+    </nav>
+  </HeaderWrapper>
+)
 
 const HeaderWrapper = styled.header`
   position: absolute;
