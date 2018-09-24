@@ -1,5 +1,4 @@
 import styled from "styled-components"
-import Markdown from "react-markdown"
 
 const BannerWrapper = styled.div`
   margin-top: -4rem;
@@ -12,13 +11,13 @@ const BannerWrapper = styled.div`
   }
 `
 
-export default ({ imageUrl, text }) => {
+export default ({ imageUrl, children }) => {
   return (
     <BannerWrapper className="container">
       <div className="card">
         <div className="banner__text">
-          <p className="banner__title">Announcement</p>
-          <Markdown source={text} />
+          {/* <p className="banner__title">Announcement</p> */}
+          {children}
         </div>
         {imageUrl && <img className="banner__image" src={imageUrl} />}
       </div>

@@ -2,11 +2,7 @@ import Document, { Head, Main, NextScript } from "next/document"
 import { ServerStyleSheet } from "styled-components"
 
 const getFacebookCrap = () =>
-  new Promise((resolve, reject) => {
-    setTimeout(() => {
-      return resolve("This is a cool facebook thing")
-    }, 1000)
-  })
+  new Promise(resolve => resolve("This is a cool facebook thing"))
 
 export default class MyDocument extends Document {
   static async getInitialProps(context) {
@@ -33,7 +29,7 @@ export default class MyDocument extends Document {
             rel="stylesheet"
             href="https://cdn.materialdesignicons.com/2.6.95/css/materialdesignicons.min.css"
           />
-          <meta name="og:title" content={this.props.result} />
+          <title>State Matters | Understand Your Local Government</title>
         </Head>
         <body className="custom_class">
           <Main />
