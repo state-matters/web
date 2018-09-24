@@ -1,4 +1,5 @@
 import { withRouter } from "next/router"
+import Head from "next/head"
 import client from "contentfulClient"
 import Markdown from "react-markdown"
 import styled from "styled-components"
@@ -6,6 +7,9 @@ import styled from "styled-components"
 const Article = ({ article }) => {
   return (
     <ArticleWrapper>
+      <Head>
+        <meta property="og:description" content={article.fields.title} />
+      </Head>
       <h1>{article.fields.title}</h1>
       <Markdown>{article.fields.body}</Markdown>
     </ArticleWrapper>
