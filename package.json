@@ -15,7 +15,9 @@
     "react-swipeable": "^4.3.0",
     "styled-components": "^3.4.9"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "babel-plugin-styled-components": "^1.7.1"
+  },
   "scripts": {
     "start:dev": "node server.js",
     "build": "next build",

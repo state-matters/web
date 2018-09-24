@@ -1,9 +1,11 @@
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 import Link from "next/link"
+import { withRouter } from "next/router"
 
-export default () => {
+const Header = ({ router }) => {
+  console.log(router)
   return (
-    <Header>
+    <HeaderWrapper isHome={router.pathname === "/"}>
       <nav>
         <Link href="/">
           <a>Home</a>
@@ -18,11 +20,11 @@ export default () => {
           <a>Lessons</a>
         </Link>
       </nav>
-    </Header>
+    </HeaderWrapper>
   )
 }
 
-const Header = styled.header`
+const HeaderWrapper = styled.header`
   position: absolute;
   top: 0;
   left: 0;
@@ -32,8 +34,13 @@ const Header = styled.header`
   nav {
     display: flex;
     margin-left: auto;
+    a {
+      color: ${({ isHome }) => (isHome ? "white" : "inherit")};
+    }
     a:not(:last-of-type) {
       margin-right: 2rem;
     }
   }
 `
+
+export default withRouter(Header)

@@ -82,12 +82,9 @@ export default class Footer extends React.Component {
           <div className="content">
             <Link href="/">
               <FooterLink>
-                <h3>StateMatters.org</h3>
+                <h3>State Matters</h3>
               </FooterLink>
             </Link>
-            <FooterLink href="/">
-              <h3>StateMatters.org</h3>
-            </FooterLink>
             <h4>Chicago, IL</h4>
             <ul>
               <li>

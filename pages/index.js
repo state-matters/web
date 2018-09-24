@@ -1,11 +1,11 @@
 import { Fragment } from "react"
-import client from "../createContentfulClient"
-import Header from "../components/Header"
-import Hero from "../components/Hero"
-import Banner from "../components/Banner"
-import FeaturedLessons from "../components/FeaturedLessons"
-import FeaturedArticles from "../components/FeaturedArticles"
-import Footer from "../components/Footer"
+import client from "contentfulClient"
+import Header from "components/Header"
+import Hero from "components/Hero"
+import Banner from "components/Banner"
+import FeaturedLessons from "components/FeaturedLessons"
+import FeaturedArticles from "components/FeaturedArticles"
+import Footer from "components/Footer"
 
 export default class Index extends React.Component {
   static async getInitialProps() {
@@ -30,7 +30,9 @@ export default class Index extends React.Component {
       <Fragment>
         <Header />
         <Hero />
-        <Banner text={banner.text} />
+        <Banner>
+          <h1>Hello world</h1>
+        </Banner>
         <FeaturedLessons lessons={lessons} />
         <LearnMore />
         <FeaturedArticles articles={articles} />
