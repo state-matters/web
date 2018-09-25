@@ -1,26 +1,33 @@
 import client from "../../createContentfulClient"
-import Link from "next/link"
+import { Fragment } from "react"
 
-const Articles = props => (
-  <section className="articles">
-    {props.allArticles.map(article => (
-      <li key={article.sys.id}>
-        <Link
-          as={`/a/${article.sys.id}`}
-          href={`/articles/show?id=${article.sys.id}`}
-        >
-          <a>{article.fields.title}</a>
-        </Link>
-      </li>
-    ))}
-  </section>
-)
+import FeaturedArticles from "components/FeaturedArticles"
 
-Articles.getInitialProps = async () => {
-  const allArticles = await client.getEntries({ content_type: "article" })
-  return {
-    allArticles: allArticles.items
+
+export default class Index extends React.Component {
+  static async getInitialProps() {
+    const getArticles = client.getEntries({
+      "sys.id": "4MfPGGWjhYOmgcUSCSAsMq"
+    })
+    const articles = await Promise.all([getArticles])
+    return {
+      articles: "articles",
+      banner: {
+        text: "# hello world"
+      }
+    }
+  }
+  render() {
+    const { banner, articles } = this.props
+    return (
+      <Fragment>
+        <Header />
+        <Hero />
+        <Banner>
+          <h1>Hello world</h1>
+        </Banner>
+        <FeaturedArticles articles={articles} />
+      </Fragment>
+    )
   }
 }
-
-export default Articles

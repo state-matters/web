@@ -1,9 +1,6 @@
 import Document, { Head, Main, NextScript } from "next/document"
 import { ServerStyleSheet } from "styled-components"
 
-const getFacebookCrap = () =>
-  new Promise(resolve => resolve("This is a cool facebook thing"))
-
 export default class MyDocument extends Document {
   static async getInitialProps(context) {
     const sheet = new ServerStyleSheet()
@@ -11,11 +8,10 @@ export default class MyDocument extends Document {
       sheet.collectStyles(<App {...props} />)
     )
     const styleTags = sheet.getStyleElement()
-    const result = await getFacebookCrap()
+
     return {
       ...page,
       styleTags,
-      result
     }
   }
 

@@ -1,4 +1,5 @@
 import { Fragment } from "react"
+
 import client from "contentfulClient"
 import Header from "components/Header"
 import Hero from "components/Hero"
