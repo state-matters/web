@@ -1,5 +1,4 @@
-import React from 'react'
-import Link from 'next/link'
-import Layout from '../../layouts/Main'
+import React from "react"
+import Link from "next/link"
 
-export default () => <Layout>About Page</Layout>
+export default () => <h1>about page</h1>

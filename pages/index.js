@@ -19,17 +19,13 @@ export default class Index extends React.Component {
     const [articles, lessons] = await Promise.all([getArticles, getLessons])
     return {
       articles: articles.items[0].fields.entries,
-      lessons: lessons.items[0].fields.entries,
-      banner: {
-        text: "# hello world"
-      }
+      lessons: lessons.items[0].fields.entries
     }
   }
   render() {
-    const { banner, lessons, articles } = this.props
+    const { lessons, articles } = this.props
     return (
       <Fragment>
-        <Header />
         <Hero />
         <Banner>
           <h1>Hello world</h1>
@@ -37,7 +33,6 @@ export default class Index extends React.Component {
         <FeaturedLessons lessons={lessons} />
         <LearnMore />
         <FeaturedArticles articles={articles} />
-        <Footer />
       </Fragment>
     )
   }

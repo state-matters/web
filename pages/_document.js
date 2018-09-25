@@ -8,10 +8,9 @@ export default class MyDocument extends Document {
       sheet.collectStyles(<App {...props} />)
     )
     const styleTags = sheet.getStyleElement()
-
     return {
       ...page,
-      styleTags,
+      styleTags
     }
   }
 
@@ -19,15 +18,15 @@ export default class MyDocument extends Document {
     return (
       <html>
         <Head>
-          <link rel="stylesheet" href="/static/base.css" />
           {this.props.styleTags}
+          <link rel="stylesheet" href="/static/base.css" />
           <link
             rel="stylesheet"
             href="https://cdn.materialdesignicons.com/2.6.95/css/materialdesignicons.min.css"
           />
           <title>State Matters | Understand Your Local Government</title>
         </Head>
-        <body className="custom_class">
+        <body>
           <Main />
           <NextScript />
         </body>
