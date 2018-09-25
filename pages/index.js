@@ -1,12 +1,9 @@
 import { Fragment } from "react"
-
 import client from "contentfulClient"
-import Header from "components/Header"
 import Hero from "components/Hero"
 import Banner from "components/Banner"
 import FeaturedLessons from "components/FeaturedLessons"
 import FeaturedArticles from "components/FeaturedArticles"
-import Footer from "components/Footer"
 
 export default class Index extends React.Component {
   static async getInitialProps() {
