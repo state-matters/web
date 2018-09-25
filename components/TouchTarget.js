@@ -1,7 +1,6 @@
-import React from "react"
-import { Link as RouterLink } from "react-router-dom"
+import { Link as RouterLink } from "next/link"
 import styled from "styled-components"
-import theme from "theme"
+import theme from "./theme"
 
 const getLinkTag = ({ children, ...props }) => {
   if (props.to) return <RouterLink {...props}>{children}</RouterLink>

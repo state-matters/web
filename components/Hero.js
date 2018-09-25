@@ -9,8 +9,7 @@ const Hero = props => {
       <Grid container className="hero__grid">
         <Column md={8} mdOffset={1}>
           <h1 className="title">
-            We clarify Illinois government with short videos & helpful summaries
-            on the issues that matter to you!
+            {props.title}
           </h1>
           <Link href="/about">
             <a className="hero__link" color={colors.grey_100}>
