@@ -26,7 +26,6 @@ export default class Index extends React.Component {
     const { lessons, articles } = this.props
     return (
       <Fragment>
-        <Header />
         <Hero />
         <Banner>
           <h1>Hello world</h1>
@@ -34,7 +33,6 @@ export default class Index extends React.Component {
         <FeaturedLessons lessons={lessons} />
         <LearnMore />
         <FeaturedArticles articles={articles} />
-        <Footer />
       </Fragment>
     )
   }

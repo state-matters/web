@@ -1,6 +1,8 @@
-import React from "react"
+import React, { Fragment } from "react"
 import analytics from "react-ga"
 import App, { Container } from "next/app"
+import Header from "components/Header"
+import Footer from "components/Footer"
 
 class Layout extends React.Component {
   componentDidMount() {
@@ -9,7 +11,13 @@ class Layout extends React.Component {
   }
   render() {
     const { children } = this.props
-    return children
+    return (
+      <Fragment>
+        <Header />
+        {children}
+        <Footer />
+      </Fragment>
+    )
   }
 }
 
