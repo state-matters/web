@@ -1,1 +1,5 @@
-export default props => <h1>I'm the about index</h1>
+import React from 'react'
+import Link from 'next/link'
+import Layout from '../../layouts/Main'
+
+export default () => <Layout>About Page</Layout>
