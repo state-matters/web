@@ -1,27 +1,32 @@
 import Document, { Head, Main, NextScript } from "next/document"
-
-const getFacebookCrap = () =>
-  new Promise((resolve, reject) => {
-    setTimeout(() => {
-      return resolve("This is a cool facebook thing")
-    }, 1000)
-  })
+import { ServerStyleSheet } from "styled-components"
 
 export default class MyDocument extends Document {
-  static async getInitialProps(ctx) {
-    const initialProps = await Document.getInitialProps(ctx)
-    const result = await getFacebookCrap()
-    return { ...initialProps, result }
+  static async getInitialProps(context) {
+    const sheet = new ServerStyleSheet()
+    const page = context.renderPage(App => props =>
+      sheet.collectStyles(<App {...props} />)
+    )
+    const styleTags = sheet.getStyleElement()
+    return {
+      ...page,
+      styleTags
+    }
   }
 
   render() {
     return (
       <html>
         <Head>
-          <style>{`body { margin: 0 } /* custom! */`}</style>
-          <meta name="og:title" content={this.props.result} />
+          {this.props.styleTags}
+          <link rel="stylesheet" href="/static/base.css" />
+          <link
+            rel="stylesheet"
+            href="https://cdn.materialdesignicons.com/2.6.95/css/materialdesignicons.min.css"
+          />
+          <title>State Matters | Understand Your Local Government</title>
         </Head>
-        <body className="custom_class">
+        <body>
           <Main />
           <NextScript />
         </body>
