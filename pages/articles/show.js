@@ -11,7 +11,7 @@ const Article = ({ article }) => {
         <meta property="og:description" content={article.fields.title} />
       </Head>
       <h1>{article.fields.title}</h1>
-      <Markdown>{article.fields.body}</Markdown>
+      <Markdown className="markdown">{article.fields.body}</Markdown>
     </ArticleWrapper>
   )
 }
