@@ -6,18 +6,20 @@ import Head from "next/head"
 
 const Lesson = ({ lesson }) => {
   return (
-    <LessonWrapper>
+    <LessonWrapper className="container">
       <Head>
         <meta property="og:title" content={lesson.fields.title} />
+        <meta
+          property="og:image"
+          content={lesson.fields.poster.fields.file.url}
+        />
       </Head>
       <h1 className="headline">{lesson.fields.title}</h1>
-      <div className="video-container">
-        <video
-          controls
-          preload="auto"
-          src={lesson.fields.video.fields.file.url}
-        />
-      </div>
+      <video
+        controls
+        preload="auto"
+        src={lesson.fields.video.fields.file.url}
+      />
       <div className="container">
         <Markdown className="markdown">{lesson.fields.body}</Markdown>
       </div>
@@ -32,24 +34,11 @@ Lesson.getInitialProps = async ({ query }) => {
 
 const LessonWrapper = styled.section`
   position: relative;
-  h1 {
-    position: absolute;
-    top: 6rem;
-    width: calc(100% - 4rem);
-    max-width: 100rem;
-    margin: 0 auto;
-  }
-  .video-container {
-    background: ${colors.grey_900};
-    min-height: calc(100vh - 2rem);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+  margin-top: 10rem;
   video {
     display: block;
     width: 100%;
-    max-width: 100rem;
+    margin-top: 5rem;
   }
 `
 
