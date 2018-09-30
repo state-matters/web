@@ -1,5 +1,5 @@
 import { Fragment } from "react"
-import client from "../../createContentfulClient"
+import client from "contentfulClient"
 import Link from "next/link"
 import FeaturedArticles from "components/FeaturedArticles"
 import GenericList from "components/GenericList"
