@@ -74,23 +74,23 @@ h5 {
 
 h1,
 .hero {
-  font-size: 6rem;
+  font-size: 4.5rem;
   font-weight: 100;
 }
 
 h2,
 .headline {
-  font-size: 3.5rem;
+  font-size: 3rem;
 }
 
 h3,
 .title {
-  font-size: 2.5rem;
+  font-size: 2rem;
 }
 
 h4,
 .subtitle {
-  font-size: 2.25rem;
+  font-size: 1.5rem;
   font-weight: 700;
 }
 
@@ -103,6 +103,10 @@ h5,
 .small {
   font-size: 1rem;
   line-height: 2;
+}
+
+main.content {
+  margin-bottom: 4rem;
 }
 
 .container {
@@ -120,7 +124,7 @@ h5,
 @media (min-width: 40rem) {
   h1,
   .hero {
-    font-size: 5rem;
+    font-size: 6rem;
   }
 
   h2,
@@ -161,4 +165,20 @@ a:active {
 
 a:hover {
   color: var(--purple-100);
+}
+
+.markdown {
+  max-width: 75rem;
+}
+
+.markdown h2 {
+  margin-top: 3rem;
+}
+
+.markdown p {
+  margin-top: 2rem;
+}
+
+.markdown img {
+  max-width: 100%;
 }
