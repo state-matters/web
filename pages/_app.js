@@ -27,7 +27,7 @@ class Layout extends React.Component {
     return (
       <AppLayout>
         <Header />
-        <main class="content">{children}</main>
+        <main className="content">{children}</main>
         <Footer />
       </AppLayout>
     )
