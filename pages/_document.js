@@ -19,12 +19,12 @@ export default class MyDocument extends Document {
     return (
       <html>
         <Head>
-          {this.props.styleTags}
           <link rel="stylesheet" href="/static/base.css" />
           <link
             rel="stylesheet"
             href="https://cdn.materialdesignicons.com/2.6.95/css/materialdesignicons.min.css"
           />
+          {this.props.styleTags}
           <title>State Matters | Understand Your Local Government</title>
         </Head>
         <body>
