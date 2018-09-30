@@ -22,12 +22,13 @@ const Header = ({ router }) => (
 )
 
 const HeaderWrapper = styled.header`
+  display: flex;
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  display: flex;
   padding: 2rem;
+  width: 100%;
+  z-index: 9;
   nav {
     display: flex;
     margin-left: auto;
