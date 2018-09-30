@@ -21,12 +21,7 @@ export default class Index extends React.Component {
     const { banner, articles } = this.props
     return (
       <Fragment>
-        <Header />
-        <Hero />
-        <Banner>
           <h1>Hello world</h1>
-        </Banner>
-        <FeaturedArticles articles={articles} />
       </Fragment>
     )
   }

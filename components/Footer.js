@@ -2,7 +2,9 @@ import styled from "styled-components"
 import { colors } from "../constants"
 import Link from "next/link"
 
-const StyledFooter = styled.footer`
+const StyledFooter = styled.footer.attrs({
+  className: "footer"
+})`
   display: grid;
   grid-template-columns: 1fr;
   color: ${colors.grey_300};

@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[4],{356:function(e,t,n){__NEXT_REGISTER_PAGE("/about/team",function(){return e.exports=n(357),{page:e.exports.default}})},357:function(e,t,n){"use strict";n.r(t);var a=n(0),u=n.n(a);t.default=function(e){return u.a.createElement("h1",null,"I'm the team page")}}},[[356,1,0]]]);
