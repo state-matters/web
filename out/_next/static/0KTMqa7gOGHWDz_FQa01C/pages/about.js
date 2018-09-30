@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[3],{354:function(n,t,e){__NEXT_REGISTER_PAGE("/about",function(){return n.exports=e(355),{page:n.exports.default}})},355:function(n,t,e){"use strict";e.r(t);var u=e(0),o=e.n(u);t.default=function(n){return o.a.createElement("h1",null,"I'm the about index")}}},[[354,1,0]]]);
