@@ -23,7 +23,8 @@
     "start:dev": "node server.js",
     "build": "next build",
     "export": "next export",
-    "start": "NODE_ENV=production node server.js"
+    "start": "NODE_ENV=production node server.js",
+    "heroku-postbuild": "next build"
   },
   "keywords": [],
   "author": "",
