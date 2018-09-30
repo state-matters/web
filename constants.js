@@ -1,10 +1,10 @@
 module.exports = {
   colors: {
-    grey_100: "#fffbf9",
-    grey_300: "#e7e3e0",
-    grey_500: "#b0b0b0",
-    grey_700: "#797470",
-    grey_900: "#201e1d",
+    grey_100: "#fffdfc",
+    grey_300: "#f0eeee",
+    grey_500: "#cbc8c7",
+    grey_700: "#827f7f",
+    grey_900: "#1a1919",
 
     orange_100: "rgb(255, 217, 205)",
     orange_300: "rgb(245, 171, 148)",
