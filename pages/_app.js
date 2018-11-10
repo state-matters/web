@@ -1,7 +1,8 @@
 import React from "react"
 import analytics from "react-ga"
 import styled from "styled-components"
-import App, { Container } from "next/app"
+import { default as Next, Container } from "next/app"
+import Head from "next/head"
 import Header from "components/Header"
 import Footer from "components/Footer"
 
@@ -13,8 +14,16 @@ const AppLayout = styled.div`
     margin-top: auto;
   }
 `
+export default class App extends Next {
+  static async getInitialProps({ Component, ctx }) {
+    let pageProps = {}
 
-class Layout extends React.Component {
+    if (Component.getInitialProps) {
+      pageProps = await Component.getInitialProps(ctx)
+    }
+
+    return { pageProps }
+  }
   componentDidMount() {
     if (!window.hasAnalytics) {
       analytics.initialize("UA-112946294-1")
@@ -23,25 +32,19 @@ class Layout extends React.Component {
     analytics.set({ page: window.location.pathname })
   }
   render() {
-    const { children } = this.props
-    return (
-      <AppLayout>
-        <Header />
-        <main className="content">{children}</main>
-        <Footer />
-      </AppLayout>
-    )
-  }
-}
-
-export default class StateMattersApp extends App {
-  render() {
     const { Component, pageProps } = this.props
     return (
       <Container>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <Head>
+          <title>State Matters | Understand Your Local Government</title>
+        </Head>
+        <AppLayout>
+          <Header />
+          <main className="content">
+            <Component {...pageProps} />
+          </main>
+          <Footer />
+        </AppLayout>
       </Container>
     )
   }

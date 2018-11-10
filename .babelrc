@@ -8,6 +8,16 @@
         "displayName": true,
         "preprocess": false
       }
+    ],
+    [
+      "module-resolver",
+      {
+        "alias": {
+          "constants": "./constants.js",
+          "contentfulClient": "./contentfulClient.js",
+          "components": "./components"
+        }
+      }
     ]
   ]
 }
