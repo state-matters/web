@@ -1,0 +1,28 @@
+{
+  "name": "boilerplate",
+  "version": "1.0.0",
+  "main": "next.config.js",
+  "scripts": {
+    "start:dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "keywords": [
+    "boilerplate",
+    "react",
+    "next.js",
+    "styled-components"
+  ],
+  "author": "Patrick Krawczykowski <patrick@dreadful.design>",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "dependencies": {
+    "next": "^8.0.3",
+    "react": "^16.8.3",
+    "react-dom": "^16.8.3",
+    "styled-components": "^4.1.3"
+  },
+  "devDependencies": {
+    "babel-plugin-module-resolver": "^3.2.0",
+    "babel-plugin-styled-components": "^1.10.0"
+  }
+}

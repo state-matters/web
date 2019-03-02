@@ -1,0 +1,15 @@
+{
+  "presets": ["next/babel"],
+  "plugins": [
+    "styled-components",
+    [
+      "module-resolver",
+      {
+        "alias": {
+          "constants": "./constants.js",
+          "components": "./components"
+        }
+      }
+    ]
+  ]
+}
