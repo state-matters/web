@@ -1,5 +1,5 @@
 {
-  "name": "boilerplate",
+  "name": "@statematters/web",
   "version": "1.0.0",
   "main": "next.config.js",
   "scripts": {
@@ -13,10 +13,15 @@
     "next.js",
     "styled-components"
   ],
-  "author": "Patrick Krawczykowski <patrick@dreadful.design>",
+  "contributors": [
+    "Patrick Krawczykowski <patrick@dreadful.design>"
+  ],
   "license": "SEE LICENSE IN LICENSE.md",
   "dependencies": {
+    "@statematters/components": "^1.0.0",
     "next": "^8.0.3",
+    "prismic-javascript": "^2.0.1",
+    "prismic-reactjs": "^0.3.2",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
     "styled-components": "^4.1.3"
