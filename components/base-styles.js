@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components"
+import { colors } from "constants"
 
 export default createGlobalStyle`
 * {
@@ -15,6 +16,45 @@ body, html {
 }
 body {
   position: relative;
+  background: ${colors.grey_100};
+  color: ${colors.grey_900};
   font-size: 1.5rem;
+  font-family: "Martel", serif;
+}
+h1, h2, h3, h4, h5, p {
+  margin: 0;
+  vertical-align: middle;
+}
+h1 {
+  font-size: 3rem;
+  font-weight: 200;
+}
+h2 {
+  font-size: 2.5rem;
+}
+h3 {
+  font-size: 2rem;
+}
+h4 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+a {
+  color: ${colors.grey_900};
+  transition: 200ms;
+  &:hover {
+    color: ${colors.orange_500};
+  }
+}
+.container {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+.block-link {
+  display: inline-block;
+  color: ${colors.purple_100};
+  font-weight: 900;
+  text-decoration: none;
 }
 `
