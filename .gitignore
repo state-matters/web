@@ -1,1 +1,9 @@
+# Mac System Files
+.DS_Store
+
+# NPM Modules
 node_modules
+npm-debug.log
+
+# Next Build Folder
+.next
