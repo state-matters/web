@@ -1,6 +1,7 @@
 import React from "react"
 import { default as NextApp, Container } from "next/app"
 import BaseStyles from "components/base-styles"
+import Header from "components/header"
 
 export default class App extends NextApp {
   static async getInitialProps({ Component, ctx }) {
@@ -13,6 +14,7 @@ export default class App extends NextApp {
     return (
       <Container>
         <BaseStyles />
+        <Header />
         <Component {...initialProps} />
       </Container>
     )
