@@ -1,6 +1,10 @@
-# Next.js Boilerplate
+# State Matters Web Client
+
+Using Prismic & Next.js
+
+## To get going
 
 ```bash
-git clone https://github.com/pkrawc/boilerplate.git
 npm install
+npm run start:dev
 ```
