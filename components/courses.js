@@ -2,6 +2,7 @@ import React from "react"
 import styled from "styled-components"
 import { colors } from "constants"
 import { RichText } from "prismic-reactjs"
+import Link from "next/link"
 import Author from "components/author"
 
 const Courses = ({ data }) => (
@@ -11,12 +12,14 @@ const Courses = ({ data }) => (
       {data.map(course => {
         console.log(course)
         return (
-          <Course key={course.course.id} url={course.cover_photo.url}>
-            {RichText.render(course.title)}
-            <h4>12 Lessons</h4>
-            <Author url={course.cover_photo.url} alt="Some alt text" name="Kacie Smith" />
-            <div className="poster" />
-          </Course>
+          <Link href={{ pathname: "/course", query: { id: course.course.id } }}>
+            <Course key={course.course.id} url={course.cover_photo.url}>
+              {RichText.render(course.title)}
+              <h4>12 Lessons</h4>
+              <Author url={course.cover_photo.url} alt="Some alt text" name="Kacie Smith" />
+              <div className="poster" />
+            </Course>
+          </Link>
         )
       })}
     </div>
@@ -36,6 +39,7 @@ const Course = styled.div`
   padding: 2rem;
   background: ${colors.orange_100};
   border-radius: 4px;
+  cursor: pointer;
   overflow: hidden;
   z-index: 1;
   .poster {
