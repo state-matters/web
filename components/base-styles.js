@@ -21,23 +21,26 @@ body {
   font-size: 1.5rem;
   font-family: "Martel", serif;
 }
-h1, h2, h3, h4, h5, p {
-  margin: 0;
-  vertical-align: middle;
-}
 h1 {
+  margin: 3rem 0 1rem;
   font-size: 3rem;
   font-weight: 200;
 }
 h2 {
+  margin: 2rem 0 1rem;
   font-size: 2.5rem;
 }
 h3 {
-  font-size: 2rem;
+  margin: 2rem 0 1rem;
+  font-size: 2.25rem;
 }
 h4 {
-  font-size: 1.5rem;
+  margin: 1rem 0 1rem;
+  font-size: 2rem;
   font-weight: 700;
+}
+p {
+  margin: 1rem 0 0;
 }
 a {
   color: ${colors.grey_900};
