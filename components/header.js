@@ -5,20 +5,20 @@ import { withRouter } from "next/router"
 import { colors } from "constants"
 import Button from "@statematters/components/button"
 import Logo from "components/logo"
+import Container from "components/container"
 
 const Header = ({ router: { pathname } }) => {
-  console.log(pathname)
-  const color = pathname === "/" ? colors.grey_100 : colors.grey_900
+  const color = pathname === "/" || pathname === "/course" ? colors.grey_100 : colors.grey_900
   return (
     <StyledHeader>
-      <div className="container">
+      <Container width={pathname === "/course" ? 105 : 72}>
         <Link href="/">
           <a>
             <Logo className="header__logo" color={color} />
           </a>
         </Link>
         <Button bg={colors.orange_500}>Dontate</Button>
-      </div>
+      </Container>
     </StyledHeader>
   )
 }
@@ -30,7 +30,7 @@ const StyledHeader = styled.header`
   padding: 2rem 0;
   width: 100%;
   z-index: 9;
-  .container {
+  ${Container} {
     display: flex;
     align-items: center;
   }
