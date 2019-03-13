@@ -19,6 +19,7 @@
   "license": "SEE LICENSE IN LICENSE.md",
   "dependencies": {
     "@statematters/components": "^1.0.0",
+    "clsx": "^1.0.3",
     "next": "^8.0.3",
     "prismic-javascript": "^2.0.1",
     "prismic-reactjs": "^0.3.2",
