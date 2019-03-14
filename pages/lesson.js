@@ -29,7 +29,11 @@ const Lesson = ({ document: { data, first_publication_date }, id }) => {
         <section className="lesson__body">{RichText.render(data.body)}</section>
         <ul className="social">
           <li>
-            <a className="mdi mdi-twitter" href="" />
+            <a
+              className="mdi mdi-twitter"
+              href={`https://twitter.com/intent/tweet?text=${data.tweet}`}
+              data-size="large"
+            />
           </li>
           <li>
             <a className="mdi mdi-facebook" href="" />
