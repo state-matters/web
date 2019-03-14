@@ -12,7 +12,7 @@ const Header = ({ router: { pathname } }) => {
   return (
     <StyledHeader>
       <Container width={pathname === "/course" ? 105 : 82}>
-        <Link href="/">
+        <Link prefetch href="/">
           <a>
             <Logo className="header__logo" color={color} />
           </a>

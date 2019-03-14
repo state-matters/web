@@ -61,7 +61,6 @@ About.getInitialProps = async () => {
   try {
     const api = await Prismic.api(apiUrl)
     const document = await api.getSingle("about_page")
-    console.log(document)
     return { document }
   } catch (error) {
     return { error }

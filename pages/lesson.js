@@ -2,19 +2,30 @@ import styled from "styled-components"
 import { apiUrl, colors } from "constants"
 import Prismic from "prismic-javascript"
 import { RichText, Link } from "prismic-reactjs"
+import Head from "next/head"
 import Container from "components/container"
 
-const Lesson = ({ document: { data, first_publication_date } }) => {
+const Lesson = ({ document: { data, first_publication_date }, id }) => {
   const options = { day: "2-digit", month: "long", year: "numeric" }
   return (
     <Page>
+      <Head>
+        <meta property="og:title" content={RichText.asText(data.title)} />
+        <meta property="og:description" content={RichText.asText(data.body).substring(0, 50)} />
+        <meta property="og:image" content={data.poster.url} />
+        <meta property="og:url" content={`http://statematters.org/lesson?id=${id}`} />
+        <meta name="twitter:title" content={RichText.asText(data.title)} />
+        <meta name="twitter:description" content={RichText.asText(data.body).substring(0, 50)} />
+        <meta name="twitter:image" content={data.poster.url} />
+        <meta name="twitter:card" content="summary_large_image" />
+      </Head>
       <Container>
         <h1 className="lesson__title">{RichText.asText(data.title)}</h1>
         <p className="lesson__subtitle">
           {new Date(first_publication_date).toLocaleDateString("en-US", options)} |{" "}
           {Math.round(data.word_count / 200)} min read{" "}
         </p>
-        <img src={Link.url(data.poster)} alt={data.poster.alt} className="lesson__poster" />
+        <img src={data.poster.url} alt={data.poster.alt} className="lesson__poster" />
         <section className="lesson__body">{RichText.render(data.body)}</section>
         <ul className="social">
           <li>
@@ -36,7 +47,7 @@ Lesson.getInitialProps = async ({ query }) => {
   try {
     const api = await Prismic.api(apiUrl)
     const document = await api.getByID(query.id)
-    return { document }
+    return { document, id: query.id }
   } catch (error) {
     return { error }
   }

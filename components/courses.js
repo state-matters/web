@@ -28,7 +28,7 @@ const Courses = ({ data }) => (
 )
 
 const StyledCourses = styled.section`
-  margin: 4rem 0;
+  margin: 4rem 0 8rem;
   .title {
     margin-bottom: 2rem;
     color: ${colors.grey_700};
