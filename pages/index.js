@@ -7,6 +7,7 @@ import Banner from "components/banner"
 import FeaturedLessons from "components/featured-lessons"
 import Courses from "components/courses"
 import Footer from "components/footer"
+import Container from "components/container"
 
 const Homepage = ({
   document: {
@@ -21,17 +22,17 @@ const Homepage = ({
   return (
     <Main>
       <section className="hero">
-        <div className="container">
+        <Container>
           <h1>{RichText.render(hero_title)}</h1>
           <Link href="/about">
             <a className="block-link">Learn more about us.</a>
           </Link>
-        </div>
+        </Container>
       </section>
       {banner && (
-        <div className="container">
+        <Container>
           <Banner data={banner.primary} />
-        </div>
+        </Container>
       )}
       <FeaturedLessons featuredLessons={featured_lessons} />
       <Courses data={courses} />

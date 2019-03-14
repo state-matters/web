@@ -11,7 +11,7 @@ const Header = ({ router: { pathname } }) => {
   const color = pathname === "/" || pathname === "/course" ? colors.grey_100 : colors.grey_900
   return (
     <StyledHeader>
-      <Container width={pathname === "/course" ? 105 : 72}>
+      <Container width={pathname === "/course" ? 105 : 82}>
         <Link href="/">
           <a>
             <Logo className="header__logo" color={color} />

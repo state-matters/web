@@ -4,13 +4,14 @@ import { colors, linkResolver } from "constants"
 import NextLink from "next/link"
 import { RichText, Link } from "prismic-reactjs"
 import Author from "components/author"
+import Container from "components/container"
 
 export default ({ featuredLessons }) => {
   return (
     <FeaturedLessons>
-      <div className="container">
+      <Container>
         <h4 className="section-title">Featured Lessons</h4>
-      </div>
+      </Container>
       <div className="lessons">
         {featuredLessons.map(lesson => (
           <div className="lesson" key={lesson.link.id}>
@@ -47,7 +48,7 @@ const FeaturedLessons = styled.section`
       display: none;
     }
     @media (min-width: 62rem) {
-      padding-left: calc(50vw - 34rem);
+      padding-left: calc(50vw - 39rem);
       scroll-padding-left: calc(50vw - 34rem);
     }
   }

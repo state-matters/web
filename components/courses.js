@@ -4,10 +4,11 @@ import { colors } from "constants"
 import { RichText } from "prismic-reactjs"
 import Link from "next/link"
 import Author from "components/author"
+import Container from "components/container"
 
 const Courses = ({ data }) => (
   <StyledCourses>
-    <div className="container">
+    <Container>
       <h4 className="title">Courses</h4>
       {data.map(course => {
         console.log(course)
@@ -22,7 +23,7 @@ const Courses = ({ data }) => (
           </Link>
         )
       })}
-    </div>
+    </Container>
   </StyledCourses>
 )
 
