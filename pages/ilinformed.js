@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import Head from "next/head"
 import Container from "components/container"
 import Footer from "components/footer"
 import { colors, apiUrl } from "constants"
@@ -12,6 +13,15 @@ export default function Podcast({
 }) {
   return (
     <StyledPodcast>
+      <Head>
+        <meta property="og:title" content={RichText.asText(hero_title)} />
+        <meta property="og:description" content={RichText.asText(description).substring(0, 50)} />
+        <meta property="og:image" content="/static/podcast_header.jpg" />
+        <meta name="twitter:title" content={RichText.asText(hero_title)} />
+        <meta name="twitter:description" content={RichText.asText(description).substring(0, 50)} />
+        <meta name="twitter:image" content="/static/podcast_header.jpg" />
+        <meta name="twitter:card" content="summary_large_image" />
+      </Head>
       <section className="hero">
         <Container>
           <h1 className="hero__title">{RichText.asText(hero_title)}</h1>
