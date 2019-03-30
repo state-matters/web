@@ -13,7 +13,6 @@ const Lesson = ({ document: { data, first_publication_date }, id }) => {
         <meta property="og:title" content={RichText.asText(data.title)} />
         <meta property="og:description" content={RichText.asText(data.body).substring(0, 50)} />
         <meta property="og:image" content={data.poster.url} />
-        <meta property="og:url" content={`http://statematters.org/lesson?id=${id}`} />
         <meta name="twitter:title" content={RichText.asText(data.title)} />
         <meta name="twitter:description" content={RichText.asText(data.body).substring(0, 50)} />
         <meta name="twitter:image" content={data.poster.url} />
