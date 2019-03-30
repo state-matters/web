@@ -59,7 +59,7 @@ Lesson.getInitialProps = async ({ query }) => {
 
 const Page = styled.main`
   position: relative;
-  padding: 9rem 2rem 4rem;
+  padding: 9rem 0 4rem;
   .lesson__title {
     margin-bottom: 0.5rem;
   }

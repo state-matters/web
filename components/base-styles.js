@@ -19,28 +19,39 @@ body {
   background: ${colors.grey_100};
   color: ${colors.grey_900};
   font-size: 1.5rem;
-  font-family: "Martel", serif;
+  font-family: "Vollkorn", serif;
+  overflow: auto;
+}
+#__next {
+  overflow: auto;
 }
 h1 {
   margin: 3rem 0 1rem;
-  font-size: 3rem;
+  font-size: 4rem;
   font-weight: 200;
 }
 h2 {
   margin: 2rem 0 1rem;
-  font-size: 2.5rem;
+  font-size: 3rem;
 }
 h3 {
   margin: 2rem 0 1rem;
-  font-size: 2.25rem;
+  font-size: 2.5rem;
 }
 h4 {
   margin: 1rem 0 1rem;
   font-size: 2rem;
   font-weight: 700;
 }
+h5 {
+  margin: 1rem 0 1rem;
+  font-size: 1.5rem;
+  font-weight: 900;
+}
 p {
   margin: 1rem 0 0;
+  line-height: 1.666;
+  font-weight: 400;
 }
 a {
   color: ${colors.grey_900};
