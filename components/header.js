@@ -25,7 +25,7 @@ const Header = ({ router: { pathname } }) => {
             <Logo className="header__logo" color={color} />
           </a>
         </Link>
-        <Button dataTarget="#donateModal-63aac56b4345" dataToggle="modal" bg={colors.orange_500}>
+        <Button data-target="#donateModal-63aac56b4345" data-toggle="modal" bg={colors.orange_500}>
           Donate
           <span id="fc-63aac56b4345" style={{ display: "none" }} />
         </Button>
