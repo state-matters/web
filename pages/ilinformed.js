@@ -5,6 +5,7 @@ import Footer from "components/footer"
 import { colors, apiUrl } from "constants"
 import Prismic from "prismic-javascript"
 import { RichText } from "prismic-reactjs"
+import { rgba } from "polished"
 
 export default function Podcast({
   document: {
@@ -64,10 +65,36 @@ Podcast.getInitialProps = async function() {
   }
 }
 
+const smoothGradient = ({ red, green, blue }) => {
+  const colorStops = {
+    0: 1,
+    19: 0.738,
+    34: 0.541,
+    47: 0.382,
+    56.5: 0.278,
+    65: 0.194,
+    73: 0.126,
+    80.2: 0.075,
+    86.1: 0.042,
+    91: 0.021,
+    95.2: 0.008,
+    98.2: 0.002,
+    100: 0
+  }
+  let gradient = ""
+  for (let stop in colorStops) {
+    gradient += `${rgba({ red, green, blue, alpha: colorStops[stop] })} ${stop}%, `
+  }
+  return gradient.replace(/(^\s*,)|(,\s*$)/g, "")
+}
+
 const StyledPodcast = styled.main`
   position: relative;
   .hero {
-    background-image: linear-gradient(rgba(255, 253, 252, 0) 50%, rgba(255, 253, 252, 1)),
+    background-image: linear-gradient(
+        to top,
+        ${smoothGradient({ red: 255, green: 253, blue: 252 })}
+      ),
       url("/static/podcast_header.jpg");
     background-size: cover;
     background-position: center;
