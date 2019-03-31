@@ -25,7 +25,7 @@ export default function Podcast({
       </Head>
       <section className="hero">
         <Container>
-          <h1 className="hero__title">{RichText.asText(hero_title)}</h1>
+          <img className="hero__logo" src="/static/ilinformed_logo.png" alt="" />
         </Container>
       </section>
       <section className="description">
@@ -101,10 +101,14 @@ const StyledPodcast = styled.main`
     ${Container} {
       min-height: 60vh;
       padding-top: 10rem;
-      padding-bottom: 4rem;
+      padding-bottom: 6rem;
       display: flex;
       align-items: flex-end;
       justify-content: center;
+    }
+    .hero__logo {
+      width: 100%;
+      max-width: 40rem;
     }
     .hero__title {
       font-size: 4rem;
