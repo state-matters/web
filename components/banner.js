@@ -1,17 +1,20 @@
 import React from "react"
 import styled from "styled-components"
 import { colors } from "constants"
+import Link from "next/link"
 import { RichText } from "prismic-reactjs"
 import Card from "@statematters/components/card"
 
 export default ({ data }) => (
   <Banner padding={0}>
-    <div className="copy">
+    <div className="banner__copy">
       <h2>{RichText.asText(data.title)}</h2>
       {RichText.render(data.description)}
-      <a href="" />
+      <Link href={data.link.url}>
+        <a className="banner__link">Learn More</a>
+      </Link>
     </div>
-    <img src={data.image_banner.url} alt={data.image_banner.alt} />
+    <img className="banner__image" src={data.image_banner.url} alt={data.image_banner.alt} />
   </Banner>
 )
 
@@ -23,20 +26,24 @@ const Banner = styled(Card)`
   overflow: hidden;
   justify-content: flex-end;
   border-radius: 4px;
-  img {
+  .banner__image {
     display: block;
-    height: 100%;
+    height: auto;
+    max-width: 100%;
     align-self: center;
   }
-  .copy {
+  .banner__copy {
     padding: 2rem;
     align-self: flex-start;
   }
-  @media (min-width: 50rem) {
+  .banner__link {
+    display: block;
+    margin-top: 1rem;
+    color: ${colors.orange_500};
+  }
+  @media (min-width: 60rem) {
     flex-direction: row;
     justify-content: flex-start;
-    img {
-      max-height: 25rem;
-    }
+    height: 100%;
   }
 `
