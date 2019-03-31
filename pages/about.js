@@ -91,8 +91,8 @@ const StyledAbout = styled.main`
       padding: 2rem;
       background: ${colors.orange_100};
       border-radius: 4px;
-      .title {
-        font-size: 1rem;
+      .name {
+        font-weight: 700;
       }
     }
     @media (min-width: 40rem) {
@@ -107,9 +107,6 @@ const StyledAbout = styled.main`
     padding: 0 0 10rem;
     .board-member {
       display: inline-block;
-    }
-    .blurb {
-      font-size: 1.25rem;
     }
   }
 `
