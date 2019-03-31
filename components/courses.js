@@ -15,7 +15,6 @@ const Courses = ({ courses }) => (
           <Course url={course.cover_photo.url}>
             {RichText.render(course.title)}
             <h4>12 Lessons</h4>
-            <Author url={course.cover_photo.url} alt="Some alt text" name="Kacie Smith" />
             <div className="poster" />
           </Course>
         </Link>
