@@ -36,7 +36,7 @@ export default props => (
 
 const Footer = styled.footer`
   display: grid;
-  grid-template-columns: 4fr 5fr;
+  grid-template-columns: 1fr;
   .about,
   .contribute {
     padding: 8rem 4rem;
@@ -50,6 +50,7 @@ const Footer = styled.footer`
     }
   }
   .about {
+    display: none;
     text-align: right;
     background: ${colors.grey_900};
     color: ${colors.grey_500};
@@ -69,7 +70,9 @@ const Footer = styled.footer`
     }
   }
   @media (min-width: 62rem) {
+    grid-template-columns: 4fr 5fr;
     .about {
+      display: block;
       padding-left: calc(50vw - 34rem);
     }
     .contribute {
