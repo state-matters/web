@@ -1,23 +1,22 @@
 import styled from "styled-components"
 import { apiUrl, colors } from "constants"
 import Prismic from "prismic-javascript"
-import { RichText, Link } from "prismic-reactjs"
-import Head from "next/head"
+import { RichText } from "prismic-reactjs"
+import MetaTags from "components/meta-tags"
 import Container from "components/container"
 
 const Lesson = ({ document: { data, first_publication_date }, id }) => {
   const options = { day: "2-digit", month: "long", year: "numeric" }
+  const description = RichText.asText(data.body)
+    .substring(0, 250)
+    .concat("...")
   return (
     <Page>
-      <Head>
-        <meta property="og:title" content={RichText.asText(data.title)} />
-        <meta property="og:description" content={RichText.asText(data.body).substring(0, 50)} />
-        <meta property="og:image" content={data.poster.url} />
-        <meta name="twitter:title" content={RichText.asText(data.title)} />
-        <meta name="twitter:description" content={RichText.asText(data.body).substring(0, 50)} />
-        <meta name="twitter:image" content={data.poster.url} />
-        <meta name="twitter:card" content="summary_large_image" />
-      </Head>
+      <MetaTags
+        title={RichText.asText(data.title)}
+        description={description}
+        image={data.poster.url}
+      />
       <Container>
         <h1 className="lesson__title">{RichText.asText(data.title)}</h1>
         <p className="lesson__subtitle">

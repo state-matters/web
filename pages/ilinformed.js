@@ -1,11 +1,10 @@
 import styled from "styled-components"
-import Head from "next/head"
+import MetaTags from "components/meta-tags"
 import Container from "components/container"
 import Footer from "components/footer"
-import { colors, apiUrl } from "constants"
+import { colors, apiUrl, smoothGradient } from "constants"
 import Prismic from "prismic-javascript"
 import { RichText } from "prismic-reactjs"
-import { rgba } from "polished"
 
 export default function Podcast({
   document: {
@@ -14,15 +13,13 @@ export default function Podcast({
 }) {
   return (
     <StyledPodcast>
-      <Head>
-        <meta property="og:title" content={RichText.asText(hero_title)} />
-        <meta property="og:description" content={RichText.asText(description).substring(0, 50)} />
-        <meta property="og:image" content="/static/podcast_header.jpg" />
-        <meta name="twitter:title" content={RichText.asText(hero_title)} />
-        <meta name="twitter:description" content={RichText.asText(description).substring(0, 50)} />
-        <meta name="twitter:image" content="/static/podcast_header.jpg" />
-        <meta name="twitter:card" content="summary_large_image" />
-      </Head>
+      <MetaTags
+        title={RichText.asText(hero_title)}
+        description={RichText.asText(description)
+          .substring(0, 250)
+          .concat("...")}
+        image="/static/podcast_header.jpg"
+      />
       <section className="hero">
         <Container>
           <img className="hero__logo" src="/static/ilinformed_logo.png" alt="" />
@@ -63,29 +60,6 @@ Podcast.getInitialProps = async function() {
   } catch (error) {
     return { error }
   }
-}
-
-const smoothGradient = ({ red, green, blue }) => {
-  const colorStops = {
-    0: 1,
-    19: 0.738,
-    34: 0.541,
-    47: 0.382,
-    56.5: 0.278,
-    65: 0.194,
-    73: 0.126,
-    80.2: 0.075,
-    86.1: 0.042,
-    91: 0.021,
-    95.2: 0.008,
-    98.2: 0.002,
-    100: 0
-  }
-  let gradient = ""
-  for (let stop in colorStops) {
-    gradient += `${rgba({ red, green, blue, alpha: colorStops[stop] })} ${stop}%, `
-  }
-  return gradient.replace(/(^\s*,)|(,\s*$)/g, "")
 }
 
 const StyledPodcast = styled.main`
