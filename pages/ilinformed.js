@@ -65,10 +65,7 @@ Podcast.getInitialProps = async function() {
 const StyledPodcast = styled.main`
   position: relative;
   .hero {
-    background-image: linear-gradient(
-        to top,
-        ${smoothGradient({ red: 255, green: 253, blue: 252 })}
-      ),
+    background-image: linear-gradient(${smoothGradient({ red: 255, green: 253, blue: 252 })}),
       url("/static/podcast_header.jpg");
     background-size: cover;
     background-position: center;
