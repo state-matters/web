@@ -22,9 +22,10 @@ const Banner = styled(Card)`
   flex-direction: column-reverse;
   overflow: hidden;
   justify-content: flex-end;
+  border-radius: 4px;
   img {
     display: block;
-    width: 100%;
+    height: 100%;
     align-self: center;
   }
   .copy {
