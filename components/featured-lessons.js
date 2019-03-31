@@ -10,7 +10,7 @@ export default ({ featuredLessons }) => {
   return (
     <FeaturedLessons>
       <Container>
-        <h4 className="section-title">Featured Lessons</h4>
+        <h4 className="section-title">Featured</h4>
       </Container>
       <div className="lessons">
         {featuredLessons.map((lesson, i) => (
