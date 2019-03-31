@@ -13,8 +13,8 @@ export default ({ featuredLessons }) => {
         <h4 className="section-title">Featured Lessons</h4>
       </Container>
       <div className="lessons">
-        {featuredLessons.map(lesson => (
-          <div className="lesson" key={lesson.link.id}>
+        {featuredLessons.map((lesson, i) => (
+          <div className="lesson" key={i}>
             <NextLink prefetch href={Link.url(lesson.link, linkResolver)}>
               <h3 className="title">{RichText.asText(lesson.title)}</h3>
             </NextLink>
