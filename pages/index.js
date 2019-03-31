@@ -46,7 +46,7 @@ const Homepage = ({
 Homepage.getInitialProps = async () => {
   try {
     const api = await Prismic.api(apiUrl)
-    const document = await api.getSingle("home")
+    const document = await api.getSingle("home", { fetchLinks: ["member.name", "member.photo"] })
     return { document }
   } catch (error) {
     return { error }

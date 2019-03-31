@@ -29,14 +29,12 @@ const About = ({
       <Container>
         <h2>Team</h2>
         <div className="team__members">
-          {team.map(member => {
-            return (
-              <div className="member">
-                <p className="name">{member.name}</p>
-                <p className="title">{member.title}</p>
-              </div>
-            )
-          })}
+          {team.map(({ member }) => (
+            <div className="member">
+              <p className="name">{member.data.name}</p>
+              <p className="title">{member.data.title}</p>
+            </div>
+          ))}
         </div>
       </Container>
     </section>
@@ -60,7 +58,9 @@ const About = ({
 About.getInitialProps = async () => {
   try {
     const api = await Prismic.api(apiUrl)
-    const document = await api.getSingle("about_page")
+    const document = await api.getSingle("about_page", {
+      fetchLinks: ["member.name", "member.title"]
+    })
     return { document }
   } catch (error) {
     return { error }
