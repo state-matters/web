@@ -1,12 +1,14 @@
 import React from "react"
 import styled from "styled-components"
 
-export default ({ url, alt, name }) => (
-  <Author>
-    <img src={url} alt={alt} className="author__photo" />
-    <p className="author__name">{name}</p>
-  </Author>
-)
+export default ({ author }) => {
+  return (
+    <Author>
+      <img src={author.photo.url} className="author__photo" />
+      <p className="author__name">{author.name}</p>
+    </Author>
+  )
+}
 
 const Author = styled.div`
   margin-top: auto;
@@ -20,6 +22,7 @@ const Author = styled.div`
     border-radius: 50%;
   }
   .author__name {
+    margin-top: 0;
     margin-left: 1rem;
   }
 `

@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import styled from "styled-components"
 import Link from "next/link"
 import { withRouter } from "next/router"
@@ -9,15 +9,26 @@ import Container from "components/container"
 
 const Header = ({ router: { pathname } }) => {
   const color = pathname === "/" || pathname === "/course" ? colors.grey_100 : colors.grey_900
+  useEffect(() => {
+    const funraise = new Funraise({
+      id: "63aac56b-8b04-4fe9-aa94-b7a51e8bcd14:4345",
+      isPopup: true,
+      useDefaultButton: false
+    })
+    funraise.init()
+  }, [])
   return (
     <StyledHeader>
       <Container width={pathname === "/course" ? 105 : 82}>
-        <Link href="/">
+        <Link prefetch href="/">
           <a>
             <Logo className="header__logo" color={color} />
           </a>
         </Link>
-        <Button bg={colors.orange_500}>Dontate</Button>
+        <Button dataTarget="#donateModal-63aac56b4345" dataToggle="modal" bg={colors.orange_500}>
+          Donate
+          <span id="fc-63aac56b4345" style={{ display: "none" }} />
+        </Button>
       </Container>
     </StyledHeader>
   )

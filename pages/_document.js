@@ -24,12 +24,16 @@ export default class Document extends NextDoc {
           <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png" />
           {this.props.styles}
           <link
+            href="https://fonts.googleapis.com/css?family=Vollkorn:400,400i,600,700,900"
             rel="stylesheet"
-            href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,900"
           />
           <link
             rel="stylesheet"
             href="https://cdn.materialdesignicons.com/3.4.93/css/materialdesignicons.min.css"
+          />
+          <script
+            src="https://d2n4tvy2wsd0oo.cloudfront.net/widget/common/1.3/funraise.min.js"
+            type="text/javascript"
           />
         </Head>
         <body>

@@ -10,17 +10,19 @@ export default ({ featuredLessons }) => {
   return (
     <FeaturedLessons>
       <Container>
-        <h4 className="section-title">Featured Lessons</h4>
+        <h4 className="section-title">Featured</h4>
       </Container>
       <div className="lessons">
-        {featuredLessons.map(lesson => (
-          <div className="lesson" key={lesson.link.id}>
-            <NextLink prefetch href={Link.url(lesson.link, linkResolver)}>
-              <h3 className="title">{RichText.asText(lesson.title)}</h3>
-            </NextLink>
-            <Author url={lesson.poster.url} alt="Some alt text" name="Kacie Smith" />
-          </div>
-        ))}
+        {featuredLessons.map((lesson, i) => {
+          return (
+            <div className="lesson" key={i}>
+              <NextLink prefetch href={Link.url(lesson.link, linkResolver)}>
+                <h3 className="title">{RichText.asText(lesson.title)}</h3>
+              </NextLink>
+              <Author author={lesson.author.data} />
+            </div>
+          )
+        })}
         <div className="lesson-spacer" />
       </div>
     </FeaturedLessons>

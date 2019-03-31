@@ -6,29 +6,25 @@ import Link from "next/link"
 import Author from "components/author"
 import Container from "components/container"
 
-const Courses = ({ data }) => (
+const Courses = ({ courses }) => (
   <StyledCourses>
     <Container>
       <h4 className="title">Courses</h4>
-      {data.map(course => {
-        console.log(course)
-        return (
-          <Link href={{ pathname: "/course", query: { id: course.course.id } }}>
-            <Course key={course.course.id} url={course.cover_photo.url}>
-              {RichText.render(course.title)}
-              <h4>12 Lessons</h4>
-              <Author url={course.cover_photo.url} alt="Some alt text" name="Kacie Smith" />
-              <div className="poster" />
-            </Course>
-          </Link>
-        )
-      })}
+      {courses.map((course, i) => (
+        <Link key={i} href={{ pathname: "/course", query: { id: course.course.id } }}>
+          <Course url={course.cover_photo.url}>
+            {RichText.render(course.title)}
+            <h4>12 Lessons</h4>
+            <div className="poster" />
+          </Course>
+        </Link>
+      ))}
     </Container>
   </StyledCourses>
 )
 
 const StyledCourses = styled.section`
-  margin: 4rem 0;
+  margin: 4rem 0 8rem;
   .title {
     margin-bottom: 2rem;
     color: ${colors.grey_700};

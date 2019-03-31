@@ -25,7 +25,9 @@ const Homepage = ({
         <Container>
           <h1>{RichText.render(hero_title)}</h1>
           <Link href="/about">
-            <a className="block-link">Learn more about us.</a>
+            <a className="block-link">
+              <h3>Learn more about us.</h3>
+            </a>
           </Link>
         </Container>
       </section>
@@ -35,7 +37,7 @@ const Homepage = ({
         </Container>
       )}
       <FeaturedLessons featuredLessons={featured_lessons} />
-      <Courses data={courses} />
+      <Courses courses={courses} />
       <Footer />
     </Main>
   )
@@ -44,7 +46,7 @@ const Homepage = ({
 Homepage.getInitialProps = async () => {
   try {
     const api = await Prismic.api(apiUrl)
-    const document = await api.getSingle("home")
+    const document = await api.getSingle("home", { fetchLinks: ["member.name", "member.photo"] })
     return { document }
   } catch (error) {
     return { error }
