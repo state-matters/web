@@ -1,3 +1,5 @@
+import { rgba } from "polished"
+
 export const colors = {
   grey_100: "#fffdfc",
   grey_300: "#f0eeee",
@@ -32,3 +34,27 @@ export const linkResolver = doc =>
     : doc.type === "lesson"
     ? `/lesson?id=${doc.id}`
     : `/`
+
+const colorStops = {
+  0: 1,
+  19: 0.738,
+  34: 0.541,
+  47: 0.382,
+  56.5: 0.278,
+  65: 0.194,
+  73: 0.126,
+  80.2: 0.075,
+  86.1: 0.042,
+  91: 0.021,
+  95.2: 0.008,
+  98.2: 0.002,
+  100: 0
+}
+
+export const smoothGradient = ({ red, green, blue, deg = 0 }) =>
+  Object.keys(colorStops)
+    .reduce(
+      (acc, curr) => (acc += `${rgba({ red, green, blue, alpha: colorStops[curr] })} ${curr}%,`),
+      `${deg}deg, `
+    )
+    .replace(/(^\s*,)|(,\s*$)/g, "")
