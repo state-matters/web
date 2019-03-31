@@ -107,7 +107,7 @@ const StyledPodcast = styled.main`
       justify-content: center;
     }
     .hero__title {
-      font-size: 7rem;
+      font-size: 4rem;
       font-weight: 700;
       color: ${colors.orange_500};
     }
@@ -170,6 +170,9 @@ const StyledPodcast = styled.main`
     .hero {
       ${Container} {
         min-height: 90vh;
+      }
+      .hero__title {
+        font-size: 7rem;
       }
     }
     .embed {
