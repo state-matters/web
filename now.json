@@ -4,5 +4,8 @@
   "builds": [
     { "src": "next.config.js", "use": "@now/next" },
     { "src": "api/subscribe/index.js", "use": "@now/node" }
-  ]
+  ],
+  "env": {
+    "MAIL_API_KEY": "@mail-key"
+  }
 }
