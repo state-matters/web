@@ -11,9 +11,8 @@ app.post("*", async (req, res) => {
   if (!req.body.email || !req.body.name) {
     res.send(422, { error: "Need name and email to subscribe" })
   }
-  console.log(req.body)
   try {
-    const response = await axios({
+    await axios({
       method: "post",
       url: mailchimpUrl,
       auth: {
@@ -28,7 +27,6 @@ app.post("*", async (req, res) => {
         }
       })
     })
-    console.log(response)
     res.status(200).json({ name: req.body.name })
   } catch (error) {
     res.status(500).json({ error: error.response.data.detail })

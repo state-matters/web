@@ -2,6 +2,7 @@ import React from "react"
 import { default as NextApp, Container } from "next/app"
 import BaseStyles from "components/base-styles"
 import Header from "components/header"
+import SubscriptionModal from "components/subscription-modal"
 
 export default class App extends NextApp {
   static async getInitialProps({ Component, ctx }) {
@@ -26,6 +27,7 @@ export default class App extends NextApp {
         <Header />
         <Component {...initialProps} />
         <div id="fc-63aac56b4345" style={{ display: "block !important" }} />
+        <SubscriptionModal />
       </Container>
     )
   }
