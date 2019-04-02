@@ -1,5 +1,8 @@
 {
   "name": "state-matters",
   "version": 2,
-  "builds": [{ "src": "next.config.js", "use": "@now/next" }]
+  "builds": [
+    { "src": "next.config.js", "use": "@now/next" },
+    { "src": "api/subscribe.js", "use": "@now/node" }
+  ]
 }
