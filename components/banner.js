@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import { colors } from "constants"
+import { colors, linkResolver } from "constants"
 import Link from "next/link"
 import { RichText } from "prismic-reactjs"
 import Card from "@statematters/components/card"
@@ -10,7 +10,7 @@ export default ({ data }) => (
     <div className="banner__copy">
       <h2>{RichText.asText(data.title)}</h2>
       {RichText.render(data.description)}
-      <Link href={data.link.url}>
+      <Link href={Link.url(data.link, linkResolver)}>
         <a className="banner__link">Learn More</a>
       </Link>
     </div>
