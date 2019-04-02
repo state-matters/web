@@ -20,6 +20,7 @@
   "dependencies": {
     "@statematters/components": "^1.0.0",
     "clsx": "^1.0.3",
+    "express": "^4.16.4",
     "next": "^8.0.3",
     "polished": "^3.2.0",
     "prismic-javascript": "^2.0.1",

@@ -1,7 +1,14 @@
-const { parse } = require("url")
+const express = require("express")
 
-module.exports = (req, res) => {
-  const { query } = parse(req.url, true)
-  const { name = "World" } = query
-  res.end(`Hello ${name}!`)
-}
+const app = express()
+
+app.use(express.json())
+
+app.post("*", (req, res, next) => {
+  if (!req.params.name || !req.params.email) {
+    res.status(422).json({ error: "Need name and email to subscribe" })
+  }
+  res.status(200).json({ email: req.params.email })
+})
+
+module.exports = app
