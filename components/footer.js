@@ -24,7 +24,7 @@ export default props => (
       <Link href="/">
         <a className="block-link">Donate</a>
       </Link>
-      <Link href="/">
+      <Link href="/subscribe">
         <a className="block-link">Subscribe to our newsletter</a>
       </Link>
       <Link href="/">

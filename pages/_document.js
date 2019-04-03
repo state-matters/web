@@ -32,8 +32,8 @@ export default class Document extends NextDoc {
             href="https://cdn.materialdesignicons.com/3.4.93/css/materialdesignicons.min.css"
           />
           <script
-            src="https://d2n4tvy2wsd0oo.cloudfront.net/widget/common/1.3/funraise.min.js"
             type="text/javascript"
+            src="https://d2n4tvy2wsd0oo.cloudfront.net/widget/common/1.3/funraise.min.js"
           />
         </Head>
         <body>
