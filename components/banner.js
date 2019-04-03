@@ -1,8 +1,8 @@
 import React from "react"
 import styled from "styled-components"
 import { colors, linkResolver } from "constants"
-import Link from "next/link"
-import { RichText } from "prismic-reactjs"
+import NextLink from "next/link"
+import { RichText, Link } from "prismic-reactjs"
 import Card from "@statematters/components/card"
 
 export default ({ data }) => (
@@ -10,9 +10,9 @@ export default ({ data }) => (
     <div className="banner__copy">
       <h2>{RichText.asText(data.title)}</h2>
       {RichText.render(data.description)}
-      <Link href={Link.url(data.link, linkResolver)}>
+      <NextLink href={Link.url(data.link, linkResolver)}>
         <a className="banner__link">Learn More</a>
-      </Link>
+      </NextLink>
     </div>
     <img className="banner__image" src={data.image_banner.url} alt={data.image_banner.alt} />
   </Banner>

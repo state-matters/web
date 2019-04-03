@@ -23,7 +23,8 @@ app.post("*", async (req, res) => {
         email_address: req.body.email,
         status: "subscribed",
         merge_fields: {
-          NAME: req.body.name
+          FNAME: req.body.name.split(" ")[0],
+          LNAME: req.body.name.split(" ")[1]
         }
       })
     })
