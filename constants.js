@@ -28,12 +28,18 @@ export const colors = {
 
 export const apiUrl = "https://statematters.cdn.prismic.io/api/v2"
 
-export const linkResolver = doc =>
-  doc.type === "course"
-    ? `/course?id=${doc.id}`
-    : doc.type === "lesson"
-    ? `/lesson?id=${doc.id}`
-    : `/`
+export const linkResolver = doc => {
+  switch (doc.type) {
+    case "course":
+      return `/course?id=${doc.id}`
+    case "lesson":
+      return `/lesson?id=${doc.id}`
+    case "podcast":
+      return `/ilinformed`
+    default:
+      return `/`
+  }
+}
 
 const colorStops = {
   0: 1,

@@ -9,14 +9,14 @@ import Container from "components/container"
 
 const Header = ({ router: { pathname } }) => {
   const color = pathname === "/" || pathname === "/course" ? colors.grey_100 : colors.grey_900
-  useEffect(() => {
-    const funraise = new Funraise({
-      id: "63aac56b-8b04-4fe9-aa94-b7a51e8bcd14:4345",
-      isPopup: true,
-      useDefaultButton: false
-    })
-    funraise.init()
-  }, [])
+  // useEffect(() => {
+  //   const funraise = new Funraise({
+  //     id: "63aac56b-8b04-4fe9-aa94-b7a51e8bcd14:4345",
+  //     isPopup: true,
+  //     useDefaultButton: false
+  //   })
+  //   funraise.init()
+  // }, [])
   return (
     <StyledHeader>
       <Container width={pathname === "/course" ? 105 : 82}>
@@ -27,7 +27,6 @@ const Header = ({ router: { pathname } }) => {
         </Link>
         <Button data-target="#donateModal-63aac56b4345" data-toggle="modal" bg={colors.orange_500}>
           Donate
-          <span id="fc-63aac56b4345" style={{ display: "none" }} />
         </Button>
       </Container>
     </StyledHeader>
