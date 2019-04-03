@@ -26,7 +26,6 @@ export default class App extends NextApp {
         <Header />
         <Component {...initialProps} />
         <div id="fc-63aac56b4345" style={{ display: "block !important" }} />
-        <SubscriptionModal />
       </Container>
     )
   }
