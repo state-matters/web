@@ -1,6 +1,7 @@
 {
   "name": "state-matters",
   "version": 2,
+  "alias": "www.statematters.org",
   "builds": [
     { "src": "next.config.js", "use": "@now/next" },
     { "src": "api/subscribe/index.js", "use": "@now/node" }
