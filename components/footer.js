@@ -9,26 +9,23 @@ export default props => (
       <h2>StateMatters.org</h2>
       <h3>Chicago, IL</h3>
       <Link href="/about">
-        <h3 className="footer__link">About</h3>
+        <h4 className="footer__link">About</h4>
       </Link>
       <Link href="/courses">
-        <h3 className="footer__link">Courses</h3>
+        <h4 className="footer__link">Courses</h4>
       </Link>
       <Link href="/about/team">
-        <h3 className="footer__link">Team</h3>
+        <h4 className="footer__link">Team</h4>
       </Link>
     </div>
     <div className="contribute">
       <h2>Let's work together</h2>
       <h3>to understand state government.</h3>
-      <Link href="/">
-        <a className="block-link">Donate</a>
-      </Link>
       <Link href="/subscribe">
-        <a className="block-link">Subscribe to our newsletter</a>
+        <h4 className="block-link">Subscribe to our newsletter</h4>
       </Link>
-      <Link href="/">
-        <a className="block-link">Contact us</a>
+      <Link href="mailto:contact@statematters.org">
+        <h4 className="block-link">Contact us</h4>
       </Link>
     </div>
   </Footer>
@@ -42,7 +39,7 @@ const Footer = styled.footer`
     padding: 8rem 4rem;
   }
   .footer__link {
-    margin-top: 1.25rem;
+    margin-top: 1.75rem;
     cursor: pointer;
     transition: 200ms;
     &:hover {
@@ -67,6 +64,7 @@ const Footer = styled.footer`
     .block-link {
       margin-top: 2rem;
       display: block;
+      cursor: pointer;
     }
   }
   @media (min-width: 62rem) {
