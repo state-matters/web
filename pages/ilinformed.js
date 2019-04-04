@@ -18,7 +18,7 @@ export default function Podcast({
         description={RichText.asText(description)
           .substring(0, 250)
           .concat("...")}
-        image="/static/podcast_header.jpg"
+        image="https://www.statematters.org/static/podcast_header.jpg"
       />
       <section className="hero">
         <Container>
