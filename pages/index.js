@@ -37,7 +37,7 @@ const Homepage = ({
         </Container>
       )}
       <FeaturedLessons featuredLessons={featured_lessons} />
-      {courses.length && <Courses courses={courses} />}
+      {courses.length ? <Courses courses={courses} /> : null}
       <Footer />
     </Main>
   )
