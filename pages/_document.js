@@ -24,8 +24,8 @@ export default class Document extends NextDoc {
           <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png" />
           {this.props.styles}
           <link
-            href="https://fonts.googleapis.com/css?family=Vollkorn:400,400i,600,700,900"
             rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Poppins:200,400,700,900|Vollkorn:400,600,700,900"
           />
           <link
             rel="stylesheet"

@@ -23,7 +23,7 @@ const Homepage = ({
     <Main>
       <section className="hero">
         <Container>
-          <h1>{RichText.render(hero_title)}</h1>
+          <h1 className="hero__text">{RichText.render(hero_title)}</h1>
           <Link href="/about">
             <a className="block-link">
               <h3>Learn more about us.</h3>

@@ -25,6 +25,9 @@ body {
 #__next {
   overflow: auto;
 }
+h1, h2, h3, h4, h5 {
+  font-family: "Poppins", sans-serif;
+}
 h1 {
   margin: 3rem 0 1rem;
   font-size: 4rem;
