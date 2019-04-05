@@ -15,7 +15,9 @@ export default function Podcast({
     <StyledPodcast>
       <MetaTags
         title={RichText.asText(hero_title)}
-        description={"Listen & Learn about Illinois politics, government and how the heck it all works (or doesn’t) in Springfield with Daniel Biss & Glenance Green."}
+        description={
+          "Listen & Learn about Illinois politics, government and how the heck it all works (or doesn’t) in Springfield with Daniel Biss & Glenance Green."
+        }
         image="https://www.statematters.org/static/podcast_header.jpg"
       />
       <section className="hero">
