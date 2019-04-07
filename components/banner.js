@@ -5,20 +5,26 @@ import NextLink from "next/link"
 import { RichText, Link } from "prismic-reactjs"
 import Card from "@statematters/components/card"
 
-export default ({ data }) => (
-  <Banner padding={0}>
-    <div className="banner__copy">
-      <h2>{RichText.asText(data.title)}</h2>
-      {RichText.render(data.description)}
-      <NextLink href={Link.url(data.link, linkResolver)}>
-        <a className="banner__link">Learn More</a>
-      </NextLink>
-    </div>
-    <img className="banner__image" src={data.image_banner.url} alt={data.image_banner.alt} />
-  </Banner>
-)
+export default function Banner({ data }) {
+  return (
+    <StyledBanner padding={0}>
+      <div className="banner__copy">
+        <h2>{RichText.asText(data.title)}</h2>
+        {RichText.render(data.description)}
+        <NextLink href={Link.url(data.link, linkResolver)}>
+          <a className="banner__link">{data.link_text || "Learn More"}</a>
+        </NextLink>
+      </div>
+      <img
+        className="banner__image"
+        src={data.image_banner.url}
+        alt={data.image_banner.alt || "banner image"}
+      />
+    </StyledBanner>
+  )
+}
 
-const Banner = styled(Card)`
+const StyledBanner = styled(Card)`
   margin-top: -7.5rem;
   background: ${colors.grey_100};
   display: flex;
@@ -39,7 +45,7 @@ const Banner = styled(Card)`
   .banner__link {
     display: block;
     margin-top: 1rem;
-    color: ${colors.orange_500};
+    color: ${colors.orange_700};
   }
   @media (min-width: 60rem) {
     flex-direction: row;

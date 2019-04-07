@@ -4,7 +4,7 @@ import styled from "styled-components"
 export default ({ author }) => {
   return (
     <Author>
-      <img src={author.photo.url} className="author__photo" />
+      <img src={author.photo.url} className="author__photo" alt={`${author.name}'s photo`} />
       <p className="author__name">{author.name}</p>
     </Author>
   )
