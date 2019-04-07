@@ -45,7 +45,7 @@ const StyledBanner = styled(Card)`
   .banner__link {
     display: block;
     margin-top: 1rem;
-    color: ${colors.orange_700};
+    color: ${colors.orange_900};
   }
   @media (min-width: 60rem) {
     flex-direction: row;
