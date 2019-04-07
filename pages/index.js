@@ -3,6 +3,7 @@ import { colors, apiUrl } from "constants"
 import Prismic from "prismic-javascript"
 import { RichText } from "prismic-reactjs"
 import Link from "next/link"
+import Head from "next/head"
 import Banner from "components/banner"
 import FeaturedLessons from "components/featured-lessons"
 import Courses from "components/courses"
@@ -21,9 +22,13 @@ const Homepage = ({
 }) => {
   return (
     <Main>
+      <Head>
+        <title>State Matters | Track your local government</title>
+        <meta name="description" content={RichText.asText(hero_title)} />
+      </Head>
       <section className="hero">
         <Container>
-          <h1 className="hero__text">{RichText.render(hero_title)}</h1>
+          <h1 className="hero__text">{RichText.asText(hero_title)}</h1>
           <Link href="/about">
             <a className="block-link">
               <h3>Learn more about us.</h3>
