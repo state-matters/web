@@ -5,8 +5,7 @@ import { RichText } from "prismic-reactjs"
 import MetaTags from "components/meta-tags"
 import Container from "components/container"
 
-const Lesson = ({ document: { data, first_publication_date }, id }) => {
-  const options = { day: "2-digit", month: "long", year: "numeric" }
+const Lesson = ({ document: { data }, id }) => {
   const description = RichText.asText(data.body)
     .substring(0, 250)
     .concat("...")
@@ -19,11 +18,15 @@ const Lesson = ({ document: { data, first_publication_date }, id }) => {
       />
       <Container>
         <h1 className="lesson__title">{RichText.asText(data.title)}</h1>
-        <p className="lesson__subtitle">
-          {new Date(first_publication_date).toLocaleDateString("en-US", options)} |{" "}
-          {Math.round(data.word_count / 200)} min read{" "}
-        </p>
-        <img src={data.poster.url} alt={data.poster.alt} className="lesson__poster" />
+        <p className="lesson__subtitle">{Math.round(data.word_count / 200)} min read</p>
+        {data.lesson_video.html ? (
+          <div
+            className="lesson__video"
+            dangerouslySetInnerHTML={{ __html: data.lesson_video.html }}
+          />
+        ) : (
+          <img src={data.poster.url} alt={data.poster.alt} className="lesson__poster" />
+        )}
         <section className="lesson__body">{RichText.render(data.body)}</section>
         <ul className="social">
           <li>
@@ -63,6 +66,17 @@ const Page = styled.main`
   }
   .lesson__subtitle {
     margin-bottom: 3rem;
+  }
+  .lesson__video {
+    position: relative;
+    padding-top: 56%;
+    iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
   }
   .lesson__poster {
     width: 100%;

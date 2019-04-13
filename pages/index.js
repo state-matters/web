@@ -5,8 +5,9 @@ import { RichText } from "prismic-reactjs"
 import Link from "next/link"
 import Head from "next/head"
 import Banner from "components/banner"
+import Lessons from "components/lessons"
 import FeaturedLessons from "components/featured-lessons"
-import Courses from "components/courses"
+// import Courses from "components/courses"
 import Footer from "components/footer"
 import Container from "components/container"
 
@@ -18,7 +19,8 @@ const Homepage = ({
       courses,
       body: [banner]
     }
-  }
+  },
+  lessons
 }) => {
   return (
     <Main>
@@ -41,8 +43,13 @@ const Homepage = ({
           <Banner data={banner.primary} />
         </Container>
       )}
+      {/* FEATURED LESSONS */}
       <FeaturedLessons featuredLessons={featured_lessons} />
-      {courses.length ? <Courses courses={courses} /> : null}
+
+      {/* ALL LESSONS */}
+      <Lessons lessons={lessons} />
+
+      {/* {courses.length ? <Courses courses={courses} /> : null} */}
       <Footer />
     </Main>
   )
@@ -51,8 +58,11 @@ const Homepage = ({
 Homepage.getInitialProps = async () => {
   try {
     const api = await Prismic.api(apiUrl)
-    const document = await api.getSingle("home", { fetchLinks: ["member.name", "member.photo"] })
-    return { document }
+    const lessonsQuery = Prismic.Predicates.at("document.type", "lesson")
+    const fetchHomepage = api.getSingle("home", { fetchLinks: ["lesson.poster", "lesson.title"] })
+    const fetchLessons = api.query(lessonsQuery)
+    const [document, { results: lessons }] = await Promise.all([fetchHomepage, fetchLessons])
+    return { document, lessons }
   } catch (error) {
     return { error }
   }
@@ -69,6 +79,14 @@ const Main = styled.main`
       flex-direction: column;
       justify-content: flex-end;
       min-height: 40vh;
+    }
+  }
+  .hero__text {
+    font-size: 3rem;
+  }
+  @media (min-width: 60rem) {
+    .hero__text {
+      font-size: 4rem;
     }
   }
 `

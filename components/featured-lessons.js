@@ -1,82 +1,60 @@
 import React from "react"
 import styled from "styled-components"
-import { colors, linkResolver } from "constants"
+import { colors } from "constants"
+import { RichText } from "prismic-reactjs"
 import NextLink from "next/link"
-import { RichText, Link } from "prismic-reactjs"
-import Author from "components/author"
 import Container from "components/container"
 
-export default ({ featuredLessons }) => {
+export default function FeaturedLessons({ featuredLessons }) {
   return (
-    <FeaturedLessons>
+    <StyledFeaturedLessons>
       <Container>
         <h4 className="section-title">Featured</h4>
+        {featuredLessons.map(({ lesson }) => (
+          <NextLink
+            prefetch
+            key={lesson.id}
+            href={{ pathname: "/lesson", query: { id: lesson.id } }}>
+            <FeaturedLesson url={lesson.data.poster.url}>
+              <h3>{RichText.asText(lesson.data.title)}</h3>
+              <div className="poster" />
+            </FeaturedLesson>
+          </NextLink>
+        ))}
       </Container>
-      <div className="lessons">
-        {featuredLessons.map((lesson, i) => {
-          return (
-            <div className="lesson" key={i}>
-              <NextLink prefetch href={Link.url(lesson.link, linkResolver)}>
-                <h3 className="title">{RichText.asText(lesson.title)}</h3>
-              </NextLink>
-              <Author author={lesson.author.data} />
-            </div>
-          )
-        })}
-        <div className="lesson-spacer" />
-      </div>
-    </FeaturedLessons>
+    </StyledFeaturedLessons>
   )
 }
 
-const FeaturedLessons = styled.section`
+const StyledFeaturedLessons = styled.section`
   position: relative;
   .section-title {
     margin: 6rem 0 2rem;
     color: ${colors.grey_700};
   }
-  .lessons {
-    display: flex;
-    display: flex;
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding-left: 2rem;
-    padding-bottom: 4rem;
-    scroll-padding-left: 2rem;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    -ms-overflow-style: -ms-autohiding-scrollbar;
-    &::-webkit-scrollbar {
-      display: none;
-    }
-    @media (min-width: 62rem) {
-      padding-left: calc(50vw - 39rem);
-      scroll-padding-left: calc(50vw - 34rem);
-    }
+`
+
+const FeaturedLesson = styled.div`
+  position: relative;
+  padding: 2rem;
+  background: ${colors.orange_100};
+  border-radius: 4px;
+  cursor: pointer;
+  overflow: hidden;
+  z-index: 1;
+  &:not(:first-of-type) {
+    margin-top: 2rem;
   }
-  .lesson {
-    display: flex;
-    flex-direction: column;
-    flex: 0 0 auto;
-    scroll-snap-align: start;
-    width: 100%;
-    max-width: 25rem;
-    background: ${colors.grey_300};
-    padding: 2rem;
-    border-radius: 4px;
-    &:not(:last-of-type) {
-      margin-right: 2rem;
-    }
-    .title {
-      cursor: pointer;
-      transition: 200ms;
-      &:hover {
-        color: ${colors.orange_500};
-      }
-    }
-  }
-  .lesson-spacer {
-    width: 1px;
-    flex: 0 0 auto;
+  .poster {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 20rem;
+    background-image: linear-gradient(97.5deg, rgba(255, 217, 205, 1) 15%, rgba(255, 217, 205, 0)),
+      url(${({ url }) => url});
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
   }
 `
