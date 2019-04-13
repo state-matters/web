@@ -1,19 +1,18 @@
-import React from "react"
+import React, { useRef } from "react"
 import styled from "styled-components"
 import { colors } from "constants"
 import NextLink from "next/link"
-import { RichText, Link } from "prismic-reactjs"
-// import Author from "components/author"
+import { RichText } from "prismic-reactjs"
 import Container from "components/container"
 
 export default function Lessons({ lessons }) {
-  // console.log(lessons)
+  const lessonsRef = useRef(null)
   return (
     <StyledLessons>
       <Container>
         <h4 className="section-title">All Lessons</h4>
       </Container>
-      <div className="lessons">
+      <div className="lessons" ref={lessonsRef}>
         {lessons.map((lesson, i) => {
           return (
             <div className="lesson" key={i}>
@@ -33,6 +32,20 @@ export default function Lessons({ lessons }) {
         })}
         <div className="lesson-spacer" />
       </div>
+      <Container className="slider-buttons">
+        <span
+          className="mdi mdi-chevron-left"
+          onClick={e => {
+            lessonsRef.current.scrollLeft -= 300
+          }}
+        />
+        <span
+          className="mdi mdi-chevron-right"
+          onClick={e => {
+            lessonsRef.current.scrollLeft += 300
+          }}
+        />
+      </Container>
     </StyledLessons>
   )
 }
@@ -49,7 +62,7 @@ const StyledLessons = styled.section`
     overflow-x: auto;
     overflow-y: hidden;
     padding-left: 2rem;
-    padding-bottom: 4rem;
+    padding-bottom: 2rem;
     scroll-padding-left: 2rem;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
@@ -97,5 +110,16 @@ const StyledLessons = styled.section`
   .lesson-spacer {
     width: 1px;
     flex: 0 0 auto;
+  }
+  .slider-buttons {
+    display: flex;
+    justify-content: flex-end;
+    padding-bottom: 4rem;
+    .mdi {
+      font-size: 4rem;
+      &:hover {
+        color: ${colors.purple_300};
+      }
+    }
   }
 `
