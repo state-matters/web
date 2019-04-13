@@ -2,19 +2,24 @@ import React from "react"
 import styled from "styled-components"
 import { colors } from "constants"
 import { RichText } from "prismic-reactjs"
+import NextLink from "next/link"
 import Container from "components/container"
 
 export default function FeaturedLessons({ featuredLessons }) {
-  console.log(featuredLessons)
   return (
     <StyledFeaturedLessons>
       <Container>
         <h4 className="section-title">Featured</h4>
         {featuredLessons.map(({ lesson }) => (
-          <FeaturedLesson url={lesson.data.poster.url} key={lesson.id}>
-            <h3>{RichText.asText(lesson.data.title)}</h3>
-            <div className="poster" />
-          </FeaturedLesson>
+          <NextLink
+            prefetch
+            key={lesson.id}
+            href={{ pathname: "/lesson", query: { id: lesson.id } }}>
+            <FeaturedLesson url={lesson.data.poster.url}>
+              <h3>{RichText.asText(lesson.data.title)}</h3>
+              <div className="poster" />
+            </FeaturedLesson>
+          </NextLink>
         ))}
       </Container>
     </StyledFeaturedLessons>

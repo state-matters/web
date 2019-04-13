@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import { colors, linkResolver } from "constants"
+import { colors } from "constants"
 import NextLink from "next/link"
 import { RichText, Link } from "prismic-reactjs"
 // import Author from "components/author"
@@ -24,7 +24,7 @@ export default function Lessons({ lessons }) {
                   </span>
                 ))}
               </div>
-              <NextLink prefetch href={`/lesson?id=${lesson.id}`}>
+              <NextLink href={{ pathname: "/lesson", query: { id: lesson.id } }}>
                 <h3 className="title">{RichText.asText(lesson.data.title)}</h3>
               </NextLink>
               {/* <Author author={lesson.author.data} /> */}

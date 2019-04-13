@@ -81,6 +81,14 @@ const Main = styled.main`
       min-height: 40vh;
     }
   }
+  .hero__text {
+    font-size: 3rem;
+  }
+  @media (min-width: 60rem) {
+    .hero__text {
+      font-size: 4rem;
+    }
+  }
 `
 
 export default Homepage
