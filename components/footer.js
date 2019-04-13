@@ -11,8 +11,8 @@ export default props => (
       <Link href="/about">
         <h4 className="footer__link">About</h4>
       </Link>
-      <Link href="/courses">
-        <h4 className="footer__link">Courses</h4>
+      <Link href="/ilinformed">
+        <h4 className="footer__link">IL Informed</h4>
       </Link>
       <Link href="/about/team">
         <h4 className="footer__link">Team</h4>
