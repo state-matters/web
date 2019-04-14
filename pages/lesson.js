@@ -32,7 +32,7 @@ const Lesson = ({ document: { data }, id }) => {
           <li>
             <a
               className="mdi mdi-twitter"
-              href={`https://twitter.com/intent/tweet?text=${data.tweet}`}
+              href={`https://twitter.com/intent/tweet?text=${description}+https://www.statematters.org/lesson?id=${id}`}
               data-size="large"
             />
           </li>
