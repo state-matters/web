@@ -32,15 +32,23 @@ const Lesson = ({ document: { data }, id }) => {
           <li>
             <a
               className="mdi mdi-twitter"
-              href={`https://twitter.com/intent/tweet?text=${data.tweet}`}
+              href={`https://twitter.com/intent/tweet?text=${description}+https://www.statematters.org/lesson?id=${id}`}
               data-size="large"
             />
           </li>
           <li>
-            <a className="mdi mdi-facebook" href="" />
+            <a
+              className="mdi mdi-facebook"
+              href={`https://www.facebook.com/sharer/sharer.php?u=https://www.statematters.org/lesson?id=${id}`}
+            />
           </li>
           <li>
-            <a className="mdi mdi-linkedin" href="" />
+            <a
+              className="mdi mdi-linkedin"
+              href={`https://www.linkedin.com/shareArticle?mini=true&url=https://www.statematters.org/lesson?id=${id}&title=${
+                data.title
+              }&summary=${description}`}
+            />
           </li>
         </ul>
       </Container>
