@@ -2,6 +2,7 @@ import React from "react"
 import { default as NextApp, Container } from "next/app"
 import BaseStyles from "components/base-styles"
 import Header from "components/header"
+import analytics from "react-ga"
 
 export default class App extends NextApp {
   static async getInitialProps({ Component, ctx }) {
@@ -15,6 +16,12 @@ export default class App extends NextApp {
       useDefaultButton: false
     })
     funraise.init()
+    if (!window.GA_INITIALIZED) {
+      analytics.initialize("UA-112946294-1")
+      window.GA_INITIALIZED = true
+    }
+    analytics.set({ page: window.location.pathname })
+    analytics.pageview(window.location.pathname)
   }
 
   render() {
