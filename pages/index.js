@@ -10,18 +10,32 @@ import FeaturedLessons from "components/featured-lessons"
 // import Courses from "components/courses"
 import Footer from "components/footer"
 import Container from "components/container"
+import { useSpring, animated, config } from "react-spring"
 
 const Homepage = ({
   document: {
     data: {
       hero_title,
       featured_lessons,
-      courses,
+      courses, // We're not using courses right now.
       body: [banner]
     }
   },
   lessons
 }) => {
+  const backgroundSpring = useSpring({
+    from: { top: "0%", transform: "rotate(0deg)" },
+    top: "90%",
+    transform: "rotate(3deg)",
+    config: config.slow
+  })
+  const contentSpring = useSpring({
+    from: { opacity: 0, transform: "scale(1.1)" },
+    opacity: 1,
+    transform: "scale(1)",
+    delay: 400,
+    config: config.gentle
+  })
   return (
     <Main>
       <Head>
@@ -30,13 +44,16 @@ const Homepage = ({
       </Head>
       <section className="hero">
         <Container>
-          <h1 className="hero__text">{RichText.asText(hero_title)}</h1>
-          <Link href="/about">
-            <a className="block-link">
-              <h3>Learn more about us.</h3>
-            </a>
-          </Link>
+          <animated.div style={contentSpring}>
+            <h1 className="hero__text">{RichText.asText(hero_title)}</h1>
+            <Link href="/about">
+              <a className="block-link">
+                <h3>Learn more about us.</h3>
+              </a>
+            </Link>
+          </animated.div>
         </Container>
+        <animated.div className="hero__background" style={backgroundSpring} />
       </section>
       {banner && (
         <Container>
@@ -71,15 +88,25 @@ Homepage.getInitialProps = async () => {
 const Main = styled.main`
   min-height: 100vh;
   .hero {
+    position: relative;
+    overflow: hidden;
     padding: 9rem 0 15rem;
-    background: ${colors.grey_900};
     color: ${colors.grey_100};
+    background: ${colors.grey_900};
+    min-height: 60vh;
     .container {
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      min-height: 40vh;
     }
+  }
+  .hero__background {
+    position: absolute;
+    top: 90%;
+    height: 100vh;
+    width: 150%;
+    left: -25%;
+    background: ${colors.grey_100};
   }
   .hero__text {
     font-size: 3rem;
