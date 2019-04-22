@@ -1,16 +1,23 @@
 import { default as NextDoc, Head, Main, NextScript } from "next/document"
-import { ServerStyleSheet, StyleSheetManager } from "styled-components"
+import { ServerStyleSheet } from "styled-components"
 
 export default class Document extends NextDoc {
-  static getInitialProps({ renderPage }) {
+  static async getInitialProps(context) {
     const sheet = new ServerStyleSheet()
-    const page = renderPage(App => props => (
-      <StyleSheetManager sheet={sheet.instance}>
-        <App {...props} />
-      </StyleSheetManager>
-    ))
-    const styles = sheet.getStyleElement()
-    return { ...page, styles }
+    const originalRender = context.renderPage
+    try {
+      context.renderPage = () =>
+        originalRender({
+          enhanceApp: App => props => sheet.collectStyles(<App {...props} />)
+        })
+      const initialProps = await NextDoc.getInitialProps(context)
+      return {
+        ...initialProps,
+        styles: sheet.getStyleElement()
+      }
+    } finally {
+      sheet.seal()
+    }
   }
   render() {
     return (
