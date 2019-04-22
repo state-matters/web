@@ -12,6 +12,7 @@ app.post("*", async (req, res) => {
     res.send(422, { error: "Need name and email to subscribe" })
   }
   try {
+    const [first, last] = req.body.name.split(" ")
     await axios({
       method: "post",
       url: mailchimpUrl,
@@ -23,8 +24,8 @@ app.post("*", async (req, res) => {
         email_address: req.body.email,
         status: "subscribed",
         merge_fields: {
-          FNAME: req.body.name.split(" ")[0],
-          LNAME: req.body.name.split(" ")[1]
+          FNAME: first,
+          LNAME: last
         }
       })
     })
