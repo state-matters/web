@@ -1,6 +1,9 @@
 # Mac System Files
 .DS_Store
 
+# Enviroment Variables
+.env
+
 # NPM Modules
 node_modules
 npm-debug.log
