@@ -1,26 +1,49 @@
-import { useState } from "react"
+import { useReducer } from "react"
 import styled from "styled-components"
+import { colors } from "constants"
 import axios from "axios"
 import Container from "components/container"
-import Input from "components/input"
 import Button from "@statematters/components/button"
+import Input from "components/input"
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "handle_change":
+      return { ...state, [action.name]: action.value }
+    case "subscribed":
+      return { subscribed: true, firstName: "", lastName: "", email: "" }
+    case "error":
+      return { subscribed: false, firstName: "", lastName: "", email: "" }
+    case "remove_success":
+      return { ...state, subscribed: false }
+    default:
+      throw new Error()
+  }
+}
+
+const intialState = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  subscribed: false
+}
 
 export default function Subscribe() {
-  const [firstName, setFirst] = useState("")
-  const [lastName, setLast] = useState("")
-  const [email, setEmail] = useState("")
-
-  const handleChange = (value, set) => set(value)
+  const [{ firstName, lastName, email, subscribed }, dispatch] = useReducer(reducer, intialState)
   const handleSubmit = async e => {
     e.preventDefault()
-    console.log(firstName, lastName, email)
     try {
-      await axios.post("/api/subscribe", {
-        name: `${firstName} ${lastName}`,
+      const response = await axios.post("/api/subscribe", {
+        first: firstName,
+        last: lastName,
         email
       })
+      dispatch({ type: "subscribed" })
+      setTimeout(() => {
+        dispatch({ type: "remove_success" })
+      }, 4000)
     } catch (err) {
-      console.log(err)
+      dispatch({ type: "error" })
     }
   }
   return (
@@ -28,27 +51,39 @@ export default function Subscribe() {
       <Container>
         <h1>Join our newsletter.</h1>
         <h3>Subscribe to get monthly updates about the policies and parties shaping your lives.</h3>
+        {subscribed && (
+          <h4 style={{ color: colors.green_700 }}>
+            Congrats! You've subscribed to the newsletter. You should receive an email with all the
+            deets shortly.
+          </h4>
+        )}
         <form onSubmit={handleSubmit}>
           <Input
             type="text"
             className="sub__input"
             label="First name"
             value={firstName}
-            onChange={e => handleChange(e.target.value, setFirst)}
+            onChange={e =>
+              dispatch({ type: "handle_change", name: "firstName", value: e.target.value })
+            }
           />
           <Input
             type="text"
             className="sub__input"
             label="Last name"
             value={lastName}
-            onChange={e => handleChange(e.target.value, setLast)}
+            onChange={e =>
+              dispatch({ type: "handle_change", name: "lastName", value: e.target.value })
+            }
           />
           <Input
             type="email"
             className="sub__input sub__input--email"
             label="Email address"
             value={email}
-            onChange={e => handleChange(e.target.value, setEmail)}
+            onChange={e =>
+              dispatch({ type: "handle_change", name: "email", value: e.target.value })
+            }
           />
           <Button type="submit" className="subscription-button">
             subscribe

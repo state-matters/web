@@ -4,10 +4,17 @@ import { colors, linkResolver } from "constants"
 import NextLink from "next/link"
 import { RichText, Link } from "prismic-reactjs"
 import Card from "@statematters/components/card"
+import { useSpring, animated, config } from "react-spring"
 
 export default function Banner({ data }) {
+  const spring = useSpring({
+    from: { opacity: 0, transform: "scale(1.1)" },
+    opacity: 1,
+    transform: "scale(1)",
+    config: config.gentle
+  })
   return (
-    <StyledBanner padding={0}>
+    <StyledBanner padding={0} style={spring}>
       <div className="banner__copy">
         <h2>{RichText.asText(data.title)}</h2>
         {RichText.render(data.description)}
@@ -24,14 +31,16 @@ export default function Banner({ data }) {
   )
 }
 
-const StyledBanner = styled(Card)`
-  margin-top: -7.5rem;
+const StyledBanner = styled(animated(Card))`
+  margin-top: -10rem;
   background: ${colors.grey_100};
   display: flex;
   flex-direction: column-reverse;
   overflow: hidden;
   justify-content: flex-end;
   border-radius: 4px;
+  position: relative;
+  z-index: 9;
   .banner__image {
     display: block;
     height: auto;

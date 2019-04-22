@@ -8,8 +8,9 @@ app.use(express.json())
 const mailchimpUrl = "https://us17.api.mailchimp.com/3.0/lists/ea066b0443/members"
 
 app.post("*", async (req, res) => {
-  if (!req.body.email || !req.body.name) {
-    res.send(422, { error: "Need name and email to subscribe" })
+  const { first, last, email } = req.body
+  if (!email) {
+    res.send(422, { error: "Email needed to subscribe" })
   }
   try {
     await axios({
@@ -20,17 +21,17 @@ app.post("*", async (req, res) => {
         password: process.env.MAIL_API_KEY
       },
       data: JSON.stringify({
-        email_address: req.body.email,
+        email_address: email,
         status: "subscribed",
         merge_fields: {
-          FNAME: req.body.name.split(" ")[0],
-          LNAME: req.body.name.split(" ")[1]
+          FNAME: first,
+          LNAME: last
         }
       })
     })
-    res.status(200).json({ name: req.body.name })
+    res.status(200).json({ name: `${first} ${last}` })
   } catch (error) {
-    res.status(500).json({ error: error.response.data.detail })
+    res.status(500).json({ error: error.data.detail })
   }
 })
 
