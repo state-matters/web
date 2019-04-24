@@ -23,7 +23,9 @@ export default function Lessons({ lessons }) {
                   </span>
                 ))}
               </div>
-              <NextLink href={{ pathname: "/lesson", query: { id: lesson.id } }}>
+              <NextLink
+                href={{ pathname: "/lesson", query: { uid: lesson.uid } }}
+                as={`/lesson/${lesson.uid}`}>
                 <h3 className="title">{RichText.asText(lesson.data.title)}</h3>
               </NextLink>
               {/* <Author author={lesson.author.data} /> */}

@@ -111,6 +111,7 @@ const StyledSubscribe = styled.main`
     .sub__input--email {
       grid-column: span 2;
     }
+  }
   ${Button} {
     border-radius: 4px;
     font-family: "Poppins";
