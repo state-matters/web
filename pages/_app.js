@@ -22,6 +22,16 @@ export default class App extends NextApp {
     }
     analytics.set({ page: window.location.pathname })
     analytics.pageview(window.location.pathname)
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", async () => {
+        try {
+          const registration = await navigator.serviceWorker.register("/sw.js")
+          console.log("service worker has loaded with", registration)
+        } catch {
+          console.log("fuck off")
+        }
+      })
+    }
   }
 
   render() {
