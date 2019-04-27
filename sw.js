@@ -25,3 +25,6 @@ workbox.routing.registerRoute(
 )
 
 workbox.routing.registerRoute(/\.(?:js|css)$/, new workbox.strategies.StaleWhileRevalidate())
+
+// Cache the index page to respond with 200 when offline.
+workbox.routing.registerRoute("/", new workbox.strategies.NetworkFirst())
