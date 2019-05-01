@@ -14,7 +14,8 @@ export default function FeaturedLessons({ featuredLessons }) {
           <NextLink
             prefetch
             key={lesson.id}
-            href={{ pathname: "/lesson", query: { id: lesson.id } }}>
+            href={{ pathname: "/lesson", query: { uid: lesson.uid } }}
+            as={`/lesson/${lesson.uid}`}>
             <FeaturedLesson url={lesson.data.poster.url}>
               <h3>{RichText.asText(lesson.data.title)}</h3>
               <div className="poster" />

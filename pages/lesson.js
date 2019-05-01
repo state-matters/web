@@ -5,7 +5,7 @@ import { RichText } from "prismic-reactjs"
 import MetaTags from "components/meta-tags"
 import Container from "components/container"
 
-const Lesson = ({ document: { data }, id }) => {
+const Lesson = ({ document: { data }, uid }) => {
   const description = RichText.asText(data.body)
     .substring(0, 250)
     .concat("...")
@@ -32,20 +32,20 @@ const Lesson = ({ document: { data }, id }) => {
           <li>
             <a
               className="mdi mdi-twitter"
-              href={`https://twitter.com/intent/tweet?text=${description}+https://www.statematters.org/lesson?id=${id}`}
+              href={`https://twitter.com/intent/tweet?text=${description}+https://www.statematters.org/lesson/${uid}`}
               data-size="large"
             />
           </li>
           <li>
             <a
               className="mdi mdi-facebook"
-              href={`https://www.facebook.com/sharer/sharer.php?u=https://www.statematters.org/lesson?id=${id}`}
+              href={`https://www.facebook.com/sharer/sharer.php?u=https://www.statematters.org/lesson/${uid}`}
             />
           </li>
           <li>
             <a
               className="mdi mdi-linkedin"
-              href={`https://www.linkedin.com/shareArticle?mini=true&url=https://www.statematters.org/lesson?id=${id}&title=${
+              href={`https://www.linkedin.com/shareArticle?mini=true&url=https://www.statematters.org/lesson/${uid}&title=${
                 data.title
               }&summary=${description}`}
             />
@@ -59,8 +59,8 @@ const Lesson = ({ document: { data }, id }) => {
 Lesson.getInitialProps = async ({ query }) => {
   try {
     const api = await Prismic.api(apiUrl)
-    const document = await api.getByID(query.id)
-    return { document, id: query.id }
+    const document = await api.getByUID("lesson", query.uid)
+    return { document, uid: query.uid }
   } catch (error) {
     return { error }
   }
