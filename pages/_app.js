@@ -5,6 +5,11 @@ import Header from "components/header"
 import analytics from "react-ga"
 
 export default class App extends NextApp {
+  static async getInitialProps({ Component, ctx }) {
+    return Component.getInitialProps
+      ? { initialProps: await Component.getInitialProps(ctx) }
+      : {}
+  }
 
   componentDidMount() {
     const funraise = new Funraise({
@@ -38,7 +43,7 @@ export default class App extends NextApp {
       <Container>
         <BaseStyles />
         <Header />
-        <Component />
+        <Component {...initialProps} />
         <div id="fc-63aac56b4345" style={{ display: "block !important" }} />
       </Container>
     )
