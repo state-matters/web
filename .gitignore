@@ -10,3 +10,6 @@ npm-debug.log
 
 # Next Build Folder
 .next
+
+# Code Editor Settings
+.vscode

@@ -19,18 +19,19 @@
   "license": "SEE LICENSE IN LICENSE.md",
   "dependencies": {
     "@statematters/components": "^1.1.0",
-    "axios": "^0.18.1",
+    "axios": "^0.19.0",
     "clsx": "^1.0.4",
+    "dotenv": "^8.0.0",
     "express": "^4.16.4",
-    "next": "^8.1.0",
+    "next": "^9.0.0",
     "polished": "^3.2.0",
     "prismic-javascript": "^2.0.3",
-    "prismic-reactjs": "^0.3.2",
+    "prismic-reactjs": "^1.0.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-ga": "^2.5.7",
-    "react-spring": "^8.0.19",
-    "styled-components": "^4.2.0"
+    "react-spring": "^8.0.27",
+    "styled-components": "^4.3.2"
   },
   "devDependencies": {
     "babel-plugin-module-resolver": "^3.2.0",
