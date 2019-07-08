@@ -6,7 +6,7 @@
     { "src": "next.config.js", "use": "@now/next" },
     { "src": "sw.js", "use": "@now/static" }
   ],
-  "env": {
-    "MAIL_API_KEY": "@mail-key"
+  "build": {
+    "env": { "MAIL_API_KEY": "@mail-key" }
   }
 }
