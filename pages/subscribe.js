@@ -13,7 +13,13 @@ function reducer(state, action) {
     case "subscribed":
       return { subscribed: true, firstName: "", lastName: "", email: "" }
     case "error":
-      return { subscribed: false, firstName: "", lastName: "", email: "" }
+      return {
+        subscribed: false,
+        firstName: "",
+        lastName: "",
+        email: "",
+        error: action.error
+      }
     case "remove_success":
       return { ...state, subscribed: false }
     default:
@@ -29,7 +35,10 @@ const intialState = {
 }
 
 export default function Subscribe() {
-  const [{ firstName, lastName, email, subscribed }, dispatch] = useReducer(reducer, intialState)
+  const [{ firstName, lastName, email, subscribed }, dispatch] = useReducer(
+    reducer,
+    intialState
+  )
   const handleSubmit = async e => {
     e.preventDefault()
     try {
@@ -43,18 +52,21 @@ export default function Subscribe() {
         dispatch({ type: "remove_success" })
       }, 4000)
     } catch (err) {
-      dispatch({ type: "error" })
+      dispatch({ type: "error", error: err })
     }
   }
   return (
     <StyledSubscribe>
       <Container>
         <h1>Join our newsletter.</h1>
-        <h3>Subscribe to get monthly updates about the policies and parties shaping your lives.</h3>
+        <h3>
+          Subscribe to get monthly updates about the policies and parties shaping your
+          lives.
+        </h3>
         {subscribed && (
           <h4 style={{ color: colors.green_700 }}>
-            Congrats! You've subscribed to the newsletter. You should receive an email with all the
-            deets shortly.
+            Congrats! You've subscribed to the newsletter. You should receive an email
+            with all the deets shortly.
           </h4>
         )}
         <form onSubmit={handleSubmit}>
@@ -64,7 +76,11 @@ export default function Subscribe() {
             label="First name"
             value={firstName}
             onChange={e =>
-              dispatch({ type: "handle_change", name: "firstName", value: e.target.value })
+              dispatch({
+                type: "handle_change",
+                name: "firstName",
+                value: e.target.value
+              })
             }
           />
           <Input

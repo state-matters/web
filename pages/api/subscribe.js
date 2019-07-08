@@ -15,14 +15,14 @@ export default async function handle(req, res) {
         username: "state_matters",
         password: process.env.MAIL_API_KEY
       },
-      data: JSON.stringify({
+      data: {
         email_address: email,
         status: "subscribed",
         merge_fields: {
           FNAME: first,
           LNAME: last
         }
-      })
+      }
     })
     res.status(200).json({ name: `${first} ${last}` })
   } catch (error) {
