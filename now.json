@@ -1,14 +1,8 @@
 {
   "name": "state-matters",
   "version": 2,
-  "alias": "www.statematters.org",
-  "builds": [
-    { "src": "next.config.js", "use": "@now/next" },
-    { "src": "api/subscribe/index.js", "use": "@now/node" },
-    { "src": "sw.js", "use": "@now/static" }
-  ],
-  "routes": [{ "src": "/lesson/(?<id>[^/]+)$", "dest": "/lesson?id=$id" }],
-  "env": {
-    "MAIL_API_KEY": "@mail-key"
+  "alias": ["www.statematters.org"],
+  "build": {
+    "env": { "MAIL_API_KEY": "@mail-key" }
   }
 }

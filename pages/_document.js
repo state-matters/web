@@ -1,5 +1,6 @@
 import { default as NextDoc, Head, Main, NextScript } from "next/document"
 import { ServerStyleSheet } from "styled-components"
+import { colors } from "constants"
 
 export default class Document extends NextDoc {
   static async getInitialProps(context) {
@@ -24,30 +25,16 @@ export default class Document extends NextDoc {
       <html lang="en">
         <Head>
           <meta charSet="utf-8" />
-          <meta name="theme-color" content="#f37e5a" />
+          <meta name="theme-color" content={colors.orange_500} />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <link
-            rel="apple-touch-icon"
-            sizes="180x180"
-            href="/static/favicon/apple-touch-icon.png"
-          />
-          <link
-            rel="icon"
-            type="image/png"
-            sizes="32x32"
-            href="/static/favicon/favicon-32x32.png"
-          />
-          <link
-            rel="icon"
-            type="image/png"
-            sizes="16x16"
-            href="/static/favicon/favicon-16x16.png"
-          />
-          <link rel="manifest" href="/static/manifest.json" />
+          <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-192.png" />
+          <link rel="icon" type="image/png" sizes="32x32" href="/icons/icon-32.png" />
+          <link rel="icon" type="image/png" sizes="16x16" href="/icons/icon-16.png" />
+          <link rel="manifest" href="/manifest.json" />
           {this.props.styles}
           <link
             rel="stylesheet"
-            href="https://fonts.googleapis.com/css?family=Poppins:200,400,700,900|Vollkorn:400,600,700,900"
+            href="https://fonts.googleapis.com/css?family=Poppins:200,400,600,800|Vollkorn:400,600,900"
           />
           <link
             rel="stylesheet"

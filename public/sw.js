@@ -1,4 +1,4 @@
-importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.2.0/workbox-sw.js")
+importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js")
 
 // Cache the Google Fonts stylesheets with a stale-while-revalidate strategy.
 workbox.routing.registerRoute(
@@ -54,6 +54,3 @@ workbox.routing.registerRoute(
     ]
   })
 )
-
-// Cache the index page to respond with 200 when offline.
-workbox.routing.registerRoute("/", new workbox.strategies.NetworkFirst())

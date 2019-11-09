@@ -11,11 +11,7 @@ export default function FeaturedLessons({ featuredLessons }) {
       <Container>
         <h4 className="section-title">Featured</h4>
         {featuredLessons.map(({ lesson }) => (
-          <NextLink
-            prefetch
-            key={lesson.id}
-            href={{ pathname: "/lesson", query: { uid: lesson.uid } }}
-            as={`/lesson/${lesson.uid}`}>
+          <NextLink key={lesson.id} href="/lessons/[uid]" as={`/lessons/${lesson.uid}`}>
             <FeaturedLesson url={lesson.data.poster.url}>
               <h3>{RichText.asText(lesson.data.title)}</h3>
               <div className="poster" />
@@ -52,7 +48,11 @@ const FeaturedLesson = styled.div`
     right: 0;
     bottom: 0;
     width: 20rem;
-    background-image: linear-gradient(97.5deg, rgba(255, 217, 205, 1) 15%, rgba(255, 217, 205, 0)),
+    background-image: linear-gradient(
+        97.5deg,
+        rgba(255, 217, 205, 1) 15%,
+        rgba(255, 217, 205, 0)
+      ),
       url(${({ url }) => url});
     background-size: cover;
     background-position: center;

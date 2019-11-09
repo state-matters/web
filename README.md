@@ -101,14 +101,3 @@ const document = await api.getSingle("about_page", {
 ```
 
 **For further reading on Prismic and all their awesome api's please check out the [official docs](https://prismic.io/docs)**
-
-### API
-
-We don't use a server per-say but serverless functions that operate in much the same way. The only endpoint currently available is `/subscribe` which takes a `PUT` request with a body of
-
-```json
-{
-  "name": "Full Name",
-  "email": "email@email.com"
-}
-```

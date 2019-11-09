@@ -6,65 +6,13 @@ import { colors, apiUrl, smoothGradient } from "constants"
 import Prismic from "prismic-javascript"
 import { RichText } from "prismic-reactjs"
 
-export default function Podcast({
-  document: {
-    data: { hero_title, description, podcast_embed, links }
-  }
-}) {
-  return (
-    <StyledPodcast>
-      <MetaTags
-        title={RichText.asText(hero_title)}
-        description="Listen & Learn about Illinois politics, government and how the heck it all works (or doesn’t) in Springfield with Daniel Biss & Glenance Green."
-        image="https://www.statematters.org/static/podcast_header.jpg"
-      />
-      <section className="hero">
-        <Container>
-          <img className="hero__logo" src="/static/ilinformed_logo.png" alt="" />
-        </Container>
-      </section>
-      <section className="description">
-        <Container>
-          <div className="copy">{RichText.render(description)}</div>
-          <img className="banner" src="/static/podcast_banner.jpg" alt="" />
-          <iframe className="embed" src={podcast_embed.embed_url} frameBorder="0" scrolling="no" />
-        </Container>
-      </section>
-      <section className="links">
-        <Container>
-          <h2>Listen</h2>
-          <ul className="available">
-            {links.map(({ podcast_link, link_title }, i) => (
-              <li key={i} className="link">
-                <a target={podcast_link.target} href={podcast_link.url}>
-                  {link_title}
-                </a>
-              </li>
-            ))}
-            <li className="link">Basically anywhere...</li>
-          </ul>
-        </Container>
-      </section>
-      <Footer />
-    </StyledPodcast>
-  )
-}
-
-Podcast.getInitialProps = async function() {
-  try {
-    const api = await Prismic.api(apiUrl)
-    const document = await api.getSingle("podcast")
-    return { document }
-  } catch (error) {
-    return { error }
-  }
-}
-
 const StyledPodcast = styled.main`
   position: relative;
   .hero {
-    background-image: linear-gradient(${smoothGradient({ red: 255, green: 253, blue: 252 })}),
-      url("/static/podcast_header.jpg");
+    background-image: linear-gradient(
+        ${smoothGradient({ red: 255, green: 253, blue: 252 })}
+      ),
+      url("/images/podcast_header.jpg");
     background-size: cover;
     background-position: center;
     ${Container} {
@@ -154,3 +102,68 @@ const StyledPodcast = styled.main`
     }
   }
 `
+
+async function getInitialProps() {
+  try {
+    const api = await Prismic.api(apiUrl)
+    const document = await api.getSingle("podcast")
+    return { document }
+  } catch (error) {
+    return { error }
+  }
+}
+
+export default function Podcast({
+  document: {
+    data: { hero_title, description, podcast_embed, links }
+  }
+}) {
+  return (
+    <StyledPodcast>
+      <MetaTags
+        title={RichText.asText(hero_title)}
+        description="Listen & Learn about Illinois politics, government and how the heck it all works (or doesn’t) in Springfield with Daniel Biss & Glenance Green."
+        image="https://www.statematters.org/images/podcast_header.jpg"
+      />
+      <section className="hero">
+        <Container>
+          <img
+            className="hero__logo"
+            src="/images/ilinformed_logo.png"
+            alt="ilinformed logo"
+          />
+        </Container>
+      </section>
+      <section className="description">
+        <Container>
+          <div className="copy">{RichText.render(description)}</div>
+          <img className="banner" src="/images/podcast_banner.jpg" alt="podcast banner" />
+          <iframe
+            className="embed"
+            src={podcast_embed.embed_url}
+            frameBorder="0"
+            scrolling="no"
+          />
+        </Container>
+      </section>
+      <section className="links">
+        <Container>
+          <h2>Listen</h2>
+          <ul className="available">
+            {links.map(({ podcast_link, link_title }, i) => (
+              <li key={i} className="link">
+                <a target={podcast_link.target} href={podcast_link.url}>
+                  {link_title}
+                </a>
+              </li>
+            ))}
+            <li className="link">Basically anywhere...</li>
+          </ul>
+        </Container>
+      </section>
+      <Footer />
+    </StyledPodcast>
+  )
+}
+
+Podcast.getInitialProps = getInitialProps

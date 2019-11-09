@@ -1,14 +1,10 @@
-import React from "react"
-import { default as NextApp, Container } from "next/app"
+import React, { Fragment } from "react"
+import { default as NextApp } from "next/app"
 import BaseStyles from "components/base-styles"
 import Header from "components/header"
 import analytics from "react-ga"
 
 export default class App extends NextApp {
-  static async getInitialProps({ Component, ctx }) {
-    return Component.getInitialProps ? { initialProps: await Component.getInitialProps(ctx) } : {}
-  }
-
   componentDidMount() {
     const funraise = new Funraise({
       id: "63aac56b-8b04-4fe9-aa94-b7a51e8bcd14:4345",
@@ -25,25 +21,24 @@ export default class App extends NextApp {
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", async () => {
         try {
-          const registration = await navigator.serviceWorker.register("/sw.js")
-          console.log("service worker has loaded with", registration)
-        } catch {
-          console.log("fuck off")
+          await navigator.serviceWorker.register("/sw.js")
+        } catch (err) {
+          console.log(err)
         }
       })
     }
   }
 
   render() {
-    const { Component, initialProps } = this.props
+    const { Component, pageProps } = this.props
 
     return (
-      <Container>
+      <Fragment>
         <BaseStyles />
         <Header />
-        <Component {...initialProps} />
+        <Component {...pageProps} />
         <div id="fc-63aac56b4345" style={{ display: "block !important" }} />
-      </Container>
+      </Fragment>
     )
   }
 }
