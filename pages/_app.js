@@ -1,5 +1,5 @@
-import React from "react"
-import { default as NextApp, Container } from "next/app"
+import React, { Fragment } from "react"
+import { default as NextApp } from "next/app"
 import BaseStyles from "components/base-styles"
 import Header from "components/header"
 import analytics from "react-ga"
@@ -27,10 +27,9 @@ export default class App extends NextApp {
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", async () => {
         try {
-          const registration = await navigator.serviceWorker.register("/sw.js")
-          console.log("service worker has loaded with", registration)
-        } catch {
-          console.log("fuck off")
+          await navigator.serviceWorker.register("/sw.js")
+        } catch (err) {
+          console.log(err)
         }
       })
     }
@@ -40,12 +39,12 @@ export default class App extends NextApp {
     const { Component, initialProps } = this.props
 
     return (
-      <Container>
+      <Fragment>
         <BaseStyles />
         <Header />
         <Component {...initialProps} />
         <div id="fc-63aac56b4345" style={{ display: "block !important" }} />
-      </Container>
+      </Fragment>
     )
   }
 }

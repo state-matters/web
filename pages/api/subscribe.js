@@ -1,4 +1,4 @@
-const axios = require("axios")
+import axios from "axios"
 
 const mailchimpUrl = "https://us17.api.mailchimp.com/3.0/lists/ea066b0443/members"
 

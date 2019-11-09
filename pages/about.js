@@ -5,6 +5,10 @@ import { RichText } from "prismic-reactjs"
 import Footer from "components/footer"
 import Container from "components/container"
 
+/**
+ *
+ * @param {Object} document
+ */
 const About = ({
   document: {
     data: { about_us, vision, team, advisory_board }

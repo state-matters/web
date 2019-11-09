@@ -1,11 +1,7 @@
 {
   "name": "state-matters",
   "version": 2,
-  "alias": "www.statematters.org",
-  "builds": [
-    { "src": "next.config.js", "use": "@now/next" },
-    { "src": "sw.js", "use": "@now/static" }
-  ],
+  "alias": ["www.statematters.org"],
   "build": {
     "env": { "MAIL_API_KEY": "@mail-key" }
   }

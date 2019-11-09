@@ -6,6 +6,12 @@ import { RichText, Link } from "prismic-reactjs"
 import Card from "@statematters/components/card"
 import { useSpring, animated, config } from "react-spring"
 
+/**
+ * This component represent some important information
+ *
+ * @param {*} data
+ *
+ */
 export default function Banner({ data }) {
   const spring = useSpring({
     from: { opacity: 0, transform: "scale(1.1)" },

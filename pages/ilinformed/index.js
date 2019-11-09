@@ -27,7 +27,12 @@ export default function Podcast({
         <Container>
           <div className="copy">{RichText.render(description)}</div>
           <img className="banner" src="/static/podcast_banner.jpg" alt="" />
-          <iframe className="embed" src={podcast_embed.embed_url} frameBorder="0" scrolling="no" />
+          <iframe
+            className="embed"
+            src={podcast_embed.embed_url}
+            frameBorder="0"
+            scrolling="no"
+          />
         </Container>
       </section>
       <section className="links">
@@ -63,7 +68,9 @@ Podcast.getInitialProps = async function() {
 const StyledPodcast = styled.main`
   position: relative;
   .hero {
-    background-image: linear-gradient(${smoothGradient({ red: 255, green: 253, blue: 252 })}),
+    background-image: linear-gradient(
+        ${smoothGradient({ red: 255, green: 253, blue: 252 })}
+      ),
       url("/static/podcast_header.jpg");
     background-size: cover;
     background-position: center;

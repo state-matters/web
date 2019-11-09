@@ -18,7 +18,7 @@ const Lesson = ({ document: { data }, uid }) => {
       />
       <Container>
         <h1 className="lesson__title">{RichText.asText(data.title)}</h1>
-        <p className="lesson__subtitle">{Math.round(data.word_count / 200)} min read</p>
+        {/* <p className="lesson__subtitle">{Math.round(data.word_count / 200)} min read</p> */}
         {data.lesson_video.html ? (
           <div
             className="lesson__video"
@@ -70,7 +70,7 @@ const Page = styled.main`
   position: relative;
   padding: 9rem 0 4rem;
   .lesson__title {
-    margin-bottom: 0.5rem;
+    margin-bottom: 5rem;
   }
   .lesson__subtitle {
     margin-bottom: 3rem;
