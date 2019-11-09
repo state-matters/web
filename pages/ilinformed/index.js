@@ -12,7 +12,7 @@ const StyledPodcast = styled.main`
     background-image: linear-gradient(
         ${smoothGradient({ red: 255, green: 253, blue: 252 })}
       ),
-      url("/static/podcast_header.jpg");
+      url("/images/podcast_header.jpg");
     background-size: cover;
     background-position: center;
     ${Container} {
@@ -127,7 +127,11 @@ export default function Podcast({
       />
       <section className="hero">
         <Container>
-          <img className="hero__logo" src="/images/ilinformed_logo.png" alt="" />
+          <img
+            className="hero__logo"
+            src="/images/ilinformed_logo.png"
+            alt="ilinformed logo"
+          />
         </Container>
       </section>
       <section className="description">
