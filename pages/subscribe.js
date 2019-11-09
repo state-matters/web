@@ -42,7 +42,7 @@ export default function Subscribe() {
   const handleSubmit = async e => {
     e.preventDefault()
     try {
-      const response = await axios.post("/api/subscribe", {
+      await axios.post("/api/subscribe", {
         first: firstName,
         last: lastName,
         email

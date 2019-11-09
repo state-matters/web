@@ -30,11 +30,11 @@ export default class Document extends NextDoc {
           <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-192.png" />
           <link rel="icon" type="image/png" sizes="32x32" href="/icons/icon-32x32.png" />
           <link rel="icon" type="image/png" sizes="16x16" href="/icons/icon-16x16.png" />
-          <link rel="manifest" href="/static/manifest.json" />
+          <link rel="manifest" href="/manifest.json" />
           {this.props.styles}
           <link
             rel="stylesheet"
-            href="https://fonts.googleapis.com/css?family=Poppins:200,400,700,900|Vollkorn:400,600,700,900"
+            href="https://fonts.googleapis.com/css?family=Poppins:200,400,600,800|Vollkorn:400,600,900"
           />
           <link
             rel="stylesheet"
