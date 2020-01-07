@@ -1,89 +1,17 @@
+import { useRef } from "react"
 import styled from "styled-components"
-import { colors, apiUrl } from "constants"
-import Prismic from "prismic-javascript"
 import { RichText } from "prismic-reactjs"
+import { useSpring, animated, useChain } from "react-spring"
 import Link from "next/link"
 import Head from "next/head"
+import { colors } from "constants"
 import Banner from "components/banner"
 import Lessons from "components/lessons"
 import FeaturedLessons from "components/featured-lessons"
-// import Courses from "components/courses"
 import Footer from "components/footer"
 import Container from "components/container"
-import { useSpring, animated, config } from "react-spring"
-
-const Homepage = ({
-  document: {
-    data: {
-      hero_title,
-      featured_lessons,
-      courses, // We're not using courses right now.
-      body: [banner]
-    }
-  },
-  lessons
-}) => {
-  const backgroundSpring = useSpring({
-    from: { top: "0%", transform: "rotate(0deg)" },
-    top: "90%",
-    transform: "rotate(3deg)",
-    config: config.slow
-  })
-  const contentSpring = useSpring({
-    from: { opacity: 0, transform: "scale(1.1)" },
-    opacity: 1,
-    transform: "scale(1)",
-    delay: 400,
-    config: config.gentle
-  })
-  return (
-    <Main>
-      <Head>
-        <title>State Matters | Track your local government</title>
-        <meta name="description" content={RichText.asText(hero_title)} />
-      </Head>
-      <section className="hero">
-        <Container>
-          <animated.div style={contentSpring}>
-            <h1 className="hero__text">{RichText.asText(hero_title)}</h1>
-            <Link href="/about">
-              <a className="block-link">
-                <h3>Learn more about us.</h3>
-              </a>
-            </Link>
-          </animated.div>
-        </Container>
-        <animated.div className="hero__background" style={backgroundSpring} />
-      </section>
-      {banner && (
-        <Container>
-          <Banner data={banner.primary} />
-        </Container>
-      )}
-      {/* FEATURED LESSONS */}
-      <FeaturedLessons featuredLessons={featured_lessons} />
-
-      {/* ALL LESSONS */}
-      <Lessons lessons={lessons} />
-
-      {/* {courses.length ? <Courses courses={courses} /> : null} */}
-      <Footer />
-    </Main>
-  )
-}
-
-Homepage.getInitialProps = async () => {
-  try {
-    const api = await Prismic.api(apiUrl)
-    const lessonsQuery = Prismic.Predicates.at("document.type", "lesson")
-    const fetchHomepage = api.getSingle("home", { fetchLinks: ["lesson.poster", "lesson.title"] })
-    const fetchLessons = api.query(lessonsQuery)
-    const [document, { results: lessons }] = await Promise.all([fetchHomepage, fetchLessons])
-    return { document, lessons }
-  } catch (error) {
-    return { error }
-  }
-}
+import client from "prismic-client"
+import homeQuery from "queries/home"
 
 const Main = styled.main`
   min-height: 100vh;
@@ -117,5 +45,76 @@ const Main = styled.main`
     }
   }
 `
+
+async function getInitialProps() {
+  try {
+    const { data } = await client.query({
+      query: homeQuery
+    })
+    return { response: data, error: null }
+  } catch (error) {
+    console.log(error)
+    return { response: null, error }
+  }
+}
+
+const Homepage = ({
+  response: {
+    home,
+    allLessons: { edges: lessons }
+  },
+  error
+}) => {
+  const backgroundRef = useRef()
+  const contentRef = useRef()
+  const backgroundSpring = useSpring({
+    from: { top: "0%", transform: "rotate(0deg)" },
+    top: "90%",
+    transform: "rotate(3deg)",
+    ref: backgroundRef
+  })
+  const contentSpring = useSpring({
+    from: { opacity: 0, transform: "scale(1.1)" },
+    opacity: 1,
+    transform: "scale(1)",
+    ref: contentRef
+  })
+  useChain([backgroundRef, contentRef])
+  return (
+    <Main>
+      <Head>
+        <title>State Matters | Track your local government</title>
+        <meta name="description" content={RichText.asText(home.hero_title)} />
+      </Head>
+      <section className="hero">
+        <Container>
+          <animated.div style={contentSpring}>
+            <h1 className="hero__text">{RichText.asText(home.hero_title)}</h1>
+            <Link href="/about">
+              <a className="block-link">
+                <h3>Learn more about us.</h3>
+              </a>
+            </Link>
+          </animated.div>
+        </Container>
+        <animated.div className="hero__background" style={backgroundSpring} />
+      </section>
+      {home.banner && (
+        <Container>
+          <Banner
+            photo={home.banner.photo}
+            title={home.banner.title}
+            body={home.banner.body}
+          />
+        </Container>
+      )}
+      <FeaturedLessons featuredLessons={home.featured_lessons} />
+      <Lessons lessons={lessons} />
+      <Footer />
+    </Main>
+  )
+}
+
+Homepage.getInitialProps = getInitialProps
 
 export default Homepage

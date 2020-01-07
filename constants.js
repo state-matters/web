@@ -60,7 +60,13 @@ const colorStops = {
 export const smoothGradient = ({ red, green, blue, deg = 0 }) =>
   Object.keys(colorStops)
     .reduce(
-      (acc, curr) => (acc += `${rgba({ red, green, blue, alpha: colorStops[curr] })} ${curr}%,`),
+      (acc, curr) =>
+        (acc += `${rgba({
+          red,
+          green,
+          blue,
+          alpha: colorStops[curr]
+        })} ${curr}%,`),
       `${deg}deg, `
     )
     .replace(/(^\s*,)|(,\s*$)/g, "")

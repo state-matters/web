@@ -19,14 +19,11 @@ body {
   background: ${colors.grey_100};
   color: ${colors.grey_900};
   font-size: 1.5rem;
-  font-family: "Vollkorn", serif;
+  font-family: "Poppins", sans-serif;
   overflow: auto;
 }
 #__next {
   overflow: auto;
-}
-h1, h2, h3, h4, h5 {
-  font-family: "Poppins", sans-serif;
 }
 h1 {
   margin: 3rem 0 1rem;

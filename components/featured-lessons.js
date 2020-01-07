@@ -11,9 +11,13 @@ export default function FeaturedLessons({ featuredLessons }) {
       <Container>
         <h4 className="section-title">Featured</h4>
         {featuredLessons.map(({ lesson }) => (
-          <NextLink key={lesson.id} href="/lessons/[uid]" as={`/lessons/${lesson.uid}`}>
-            <FeaturedLesson url={lesson.data.poster.url}>
-              <h3>{RichText.asText(lesson.data.title)}</h3>
+          <NextLink
+            key={lesson.id}
+            href="/lessons/[uid]"
+            as={`/lessons/${lesson._meta.uid}`}
+          >
+            <FeaturedLesson url={lesson.poster.url}>
+              <h3>{RichText.asText(lesson.title)}</h3>
               <div className="poster" />
             </FeaturedLesson>
           </NextLink>

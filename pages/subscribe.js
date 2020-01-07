@@ -60,13 +60,13 @@ export default function Subscribe() {
       <Container>
         <h1>Join our newsletter.</h1>
         <h3>
-          Subscribe to get monthly updates about the policies and parties shaping your
-          lives.
+          Subscribe to get monthly updates about the policies and parties
+          shaping your lives.
         </h3>
         {subscribed && (
           <h4 style={{ color: colors.green_700 }}>
-            Congrats! You've subscribed to the newsletter. You should receive an email
-            with all the deets shortly.
+            Congrats! You've subscribed to the newsletter. You should receive an
+            email with all the deets shortly.
           </h4>
         )}
         <form onSubmit={handleSubmit}>
@@ -89,7 +89,11 @@ export default function Subscribe() {
             label="Last name"
             value={lastName}
             onChange={e =>
-              dispatch({ type: "handle_change", name: "lastName", value: e.target.value })
+              dispatch({
+                type: "handle_change",
+                name: "lastName",
+                value: e.target.value
+              })
             }
           />
           <Input
@@ -98,7 +102,11 @@ export default function Subscribe() {
             label="Email address"
             value={email}
             onChange={e =>
-              dispatch({ type: "handle_change", name: "email", value: e.target.value })
+              dispatch({
+                type: "handle_change",
+                name: "email",
+                value: e.target.value
+              })
             }
           />
           <Button type="submit" className="subscription-button">
@@ -121,9 +129,6 @@ const StyledSubscribe = styled.main`
     grid-template-columns: 1fr 1fr;
     grid-gap: 2rem;
     margin-top: 2rem;
-    .sub__input input {
-      border-radius: 4px;
-    }
     .sub__input--email {
       grid-column: span 2;
     }

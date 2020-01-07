@@ -8,6 +8,9 @@ import { RichText } from "prismic-reactjs"
 
 const StyledPodcast = styled.main`
   position: relative;
+  .content {
+    height: 100vh;
+  }
   .hero {
     background-image: linear-gradient(
         ${smoothGradient({ red: 255, green: 253, blue: 252 })}
@@ -15,108 +18,39 @@ const StyledPodcast = styled.main`
       url("/images/podcast_header.jpg");
     background-size: cover;
     background-position: center;
-    ${Container} {
-      min-height: 60vh;
-      padding-top: 10rem;
-      padding-bottom: 6rem;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-    }
-    .hero__logo {
-      width: 100%;
-      max-width: 40rem;
-    }
-    .hero__title {
-      font-size: 4rem;
-      font-weight: 700;
-      color: ${colors.orange_500};
-    }
   }
-  .description {
-    margin: 5rem 0 4rem;
-    position: relative;
-    overflow-x: hidden;
-    min-height: 62rem;
-    .copy {
-      margin-top: 10rem;
-      max-width: 45rem;
-      background: ${colors.grey_100};
-      padding: 1rem 2rem;
-      border-radius: 4px;
-    }
-    .banner {
-      position: absolute;
-      top: 0;
-      right: 0;
-      transform: translate3d(5%, 0, 0);
-      height: 60rem;
-      border-radius: 4px;
-      box-shadow: 0 12px 12px -12px rgba(0, 0, 0, 0.24);
-      z-index: -1;
-    }
+  .hero ${Container} {
+    min-height: 90vh;
+    padding-top: 10rem;
+    padding-bottom: 4rem;
+    display: grid;
   }
-  .embed {
-    margin-top: 4rem;
+  .hero__logo {
     width: 100%;
-  }
-  .links {
-    background: ${colors.purple_900};
-    color: ${colors.grey_100};
-    padding: 4rem 0 8rem;
-    a {
-      color: ${colors.purple_100};
-      text-decoration: none;
-      &:hover {
-        color: ${colors.purple_300};
-      }
-    }
-    .available {
-      display: flex;
-      flex-wrap: wrap;
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      .link {
-        flex: 0 0 auto;
-        margin-top: 2rem;
-        font-size: 2rem;
-      }
-      .link:not(:last-of-type) {
-        margin-right: 2rem;
-      }
-    }
-  }
-  @media (min-width: 80rem) {
-    .hero {
-      ${Container} {
-        min-height: 90vh;
-      }
-      .hero__title {
-        font-size: 7rem;
-      }
-    }
-    .embed {
-      margin-left: 2rem;
-      width: calc(100% - 2rem);
-    }
+    max-width: 40rem;
+    align-self: end;
+    justify-self: center;
   }
 `
 
 async function getInitialProps() {
   try {
-    const api = await Prismic.api(apiUrl)
-    const document = await api.getSingle("podcast")
+    const client = Prismic.client(apiUrl)
+    const document = await client.getSingle("podcast")
     return { document }
   } catch (error) {
     return { error }
   }
 }
 
+function Episode({ episode }) {
+  console.log(episode)
+  return <h2>Podcast Episode</h2>
+}
+
 export default function Podcast({
-  document: {
-    data: { hero_title, description, podcast_embed, links }
-  }
+  document: { hero_title, episode_list },
+  error
 }) {
   return (
     <StyledPodcast>
@@ -130,19 +64,34 @@ export default function Podcast({
           <img
             className="hero__logo"
             src="/images/ilinformed_logo.png"
-            alt="ilinformed logo"
+            alt="IL Informed | A podcast about Illinois Government"
+          />
+        </Container>
+      </section>
+      <section className="episodes">
+        {episode_list.map((episode, idx) => (
+          <Episode key={idx} episode={episode} />
+        ))}
+      </section>
+      <section className="mentions"></section>
+      <section className="platforms"></section>
+      <Footer className="footer" />
+      {/* <section className="hero">
+        <Container>
+          <img
+            className="hero__logo"
+            src="/images/ilinformed_logo.png"
+            alt="IL Informed | A podcast about Illinois Government"
           />
         </Container>
       </section>
       <section className="description">
         <Container>
           <div className="copy">{RichText.render(description)}</div>
-          <img className="banner" src="/images/podcast_banner.jpg" alt="podcast banner" />
-          <iframe
-            className="embed"
-            src={podcast_embed.embed_url}
-            frameBorder="0"
-            scrolling="no"
+          <img
+            className="banner"
+            src="/images/podcast_banner.jpg"
+            alt="podcast banner"
           />
         </Container>
       </section>
@@ -150,10 +99,10 @@ export default function Podcast({
         <Container>
           <h2>Listen</h2>
           <ul className="available">
-            {links.map(({ podcast_link, link_title }, i) => (
-              <li key={i} className="link">
-                <a target={podcast_link.target} href={podcast_link.url}>
-                  {link_title}
+            {platforms.map(({ platform_link, platform_name }) => (
+              <li key={platform_name} className="link">
+                <a target="_blank" href={platform_link.url}>
+                  {platform_name}
                 </a>
               </li>
             ))}
@@ -161,7 +110,7 @@ export default function Podcast({
           </ul>
         </Container>
       </section>
-      <Footer />
+      <Footer /> */}
     </StyledPodcast>
   )
 }

@@ -3,35 +3,7 @@ import Link from "next/link"
 import styled from "styled-components"
 import { colors } from "constants"
 
-export default props => (
-  <Footer>
-    <div className="about">
-      <h2>StateMatters.org</h2>
-      <h3>Chicago, IL</h3>
-      <Link href="/about">
-        <h4 className="footer__link">About</h4>
-      </Link>
-      <Link href="/ilinformed">
-        <h4 className="footer__link">IL Informed</h4>
-      </Link>
-      <Link href="/about/team">
-        <h4 className="footer__link">Team</h4>
-      </Link>
-    </div>
-    <div className="contribute">
-      <h2>Let's work together</h2>
-      <h3>to understand state government.</h3>
-      <Link href="/subscribe">
-        <h4 className="block-link">Subscribe to our newsletter</h4>
-      </Link>
-      <Link href="mailto:contact@statematters.org">
-        <h4 className="block-link">Contact us</h4>
-      </Link>
-    </div>
-  </Footer>
-)
-
-const Footer = styled.footer`
+const StyledFooter = styled.footer`
   display: grid;
   grid-template-columns: 1fr;
   .about,
@@ -78,3 +50,33 @@ const Footer = styled.footer`
     }
   }
 `
+
+export default function Footer(props) {
+  return (
+    <StyledFooter {...props}>
+      <div className="about">
+        <h2>StateMatters.org</h2>
+        <h3>Chicago, IL</h3>
+        <Link href="/about">
+          <h4 className="footer__link">About</h4>
+        </Link>
+        <Link href="/ilinformed">
+          <h4 className="footer__link">IL Informed</h4>
+        </Link>
+        <Link href="/about/team">
+          <h4 className="footer__link">Team</h4>
+        </Link>
+      </div>
+      <div className="contribute">
+        <h2>Let's work together</h2>
+        <h3>to understand state government.</h3>
+        <Link href="/subscribe">
+          <h4 className="block-link">Subscribe to our newsletter</h4>
+        </Link>
+        <a href="mailto:contact@statematters.org">
+          <h4 className="block-link">Contact us</h4>
+        </a>
+      </div>
+    </StyledFooter>
+  )
+}

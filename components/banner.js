@@ -1,38 +1,31 @@
 import React from "react"
 import styled from "styled-components"
-import { colors, linkResolver } from "constants"
-import NextLink from "next/link"
-import { RichText, Link } from "prismic-reactjs"
+import { colors } from "constants"
 import Card from "@statematters/components/card"
+import { RichText } from "prismic-reactjs"
 import { useSpring, animated, config } from "react-spring"
+import Link from "components/link"
 
-/**
- * This component represent some important information
- *
- * @param {*} data
- *
- */
-export default function Banner({ data }) {
+export default function Banner({ title, photo, body }) {
   const spring = useSpring({
     from: { opacity: 0, transform: "scale(1.1)" },
     opacity: 1,
-    transform: "scale(1)",
-    config: config.gentle
+    transform: "scale(1)"
   })
   return (
     <StyledBanner padding={0} style={spring}>
       <div className="banner__copy">
-        <h2>{RichText.asText(data.title)}</h2>
-        {RichText.render(data.description)}
-        <NextLink href={Link.url(data.link, linkResolver)}>
-          <a className="banner__link">{data.link_text || "Learn More"}</a>
-        </NextLink>
+        <RichText render={title} />
+        <RichText render={body} serializeHyperlink={Link} />
       </div>
-      <img
-        className="banner__image"
-        src={data.image_banner.url}
-        alt={data.image_banner.alt || "banner image"}
-      />
+      <picture>
+        <source srcSet={photo.desktop.url} media="(min-width: 60rem)" />
+        <img
+          className="banner__image"
+          src={photo.url}
+          alt={photo.alt || "banner image"}
+        />
+      </picture>
     </StyledBanner>
   )
 }
