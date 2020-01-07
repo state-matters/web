@@ -6,25 +6,29 @@ import { RichText } from "prismic-reactjs"
 import Container from "components/container"
 
 export default function Lessons({ lessons }) {
-  const lessonsRef = useRef(null)
+  const lessonsRef = useRef()
+  console.log("inside lessons", lessons)
   return (
     <StyledLessons>
       <Container>
         <h4 className="section-title">All Lessons</h4>
       </Container>
       <div className="lessons" ref={lessonsRef}>
-        {lessons.map((lesson, i) => {
+        {lessons.map(({ node: lesson }, idx) => {
           return (
-            <div className="lesson" key={i}>
+            <div className="lesson" key={lesson._meta.uid}>
               <div className="tags">
-                {lesson.tags.map((tag, i) => (
-                  <span key={i} className="tag">
+                {lesson._meta.tags.map((tag, idx) => (
+                  <span key={tag} className="tag">
                     {tag}
                   </span>
                 ))}
               </div>
-              <NextLink href="/lessons/[uid]" as={`/lessons/${lesson.uid}`}>
-                <h3 className="title">{RichText.asText(lesson.data.title)}</h3>
+              <NextLink
+                href="/lessons/[uid]"
+                as={`/lessons/${lesson._meta.uid}`}
+              >
+                <h3 className="title">{RichText.asText(lesson.title)}</h3>
               </NextLink>
               {/* <Author author={lesson.author.data} /> */}
             </div>
