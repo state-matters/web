@@ -48,9 +48,10 @@ function Episode({ episode }) {
   return <h2>Podcast Episode</h2>
 }
 
-export default function Podcast({ document: {
-  hero_title, episode_list
-}, error })
+export default function Podcast({
+  document: { hero_title, episode_list },
+  error
+}) {
   return (
     <StyledPodcast>
       <MetaTags
