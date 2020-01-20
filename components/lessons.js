@@ -7,7 +7,6 @@ import Container from "components/container"
 
 export default function Lessons({ lessons }) {
   const lessonsRef = useRef()
-  console.log("inside lessons", lessons)
   return (
     <StyledLessons>
       <Container>

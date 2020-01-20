@@ -11,7 +11,7 @@ import FeaturedLessons from "components/featured-lessons"
 import Footer from "components/footer"
 import Container from "components/container"
 import client from "prismic-client"
-import homeQuery from "queries/home"
+import { gql } from "@apollo/client"
 
 const Main = styled.main`
   min-height: 100vh;
@@ -49,7 +49,44 @@ const Main = styled.main`
 async function getInitialProps() {
   try {
     const { data } = await client.query({
-      query: homeQuery
+      query: gql`
+        query {
+          home(uid: "home-page", lang: "en-us") {
+            hero_title
+            banner {
+              _linkType
+              ... on Banner {
+                title
+                body
+                photo
+              }
+            }
+            featured_lessons {
+              lesson {
+                _linkType
+                ... on Lesson {
+                  title
+                  poster
+                  _meta {
+                    uid
+                  }
+                }
+              }
+            }
+          }
+          allLessons {
+            edges {
+              node {
+                title
+                _meta {
+                  tags
+                  uid
+                }
+              }
+            }
+          }
+        }
+      `
     })
     return { response: data, error: null }
   } catch (error) {
@@ -100,7 +137,7 @@ const Homepage = ({
         <animated.div className="hero__background" style={backgroundSpring} />
       </section>
       {home.banner && (
-        <Container>
+        <Container key={home.banner.title}>
           <Banner
             photo={home.banner.photo}
             title={home.banner.title}

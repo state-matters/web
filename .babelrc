@@ -7,7 +7,6 @@
       {
         "alias": {
           "constants": "./constants.js",
-          "queries": "./queries",
           "components": "./components",
           "prismic-client": "./prismic.js"
         }
