@@ -8,54 +8,6 @@ import MetaTags from "components/meta-tags"
 import Container from "components/container"
 import Footer from "components/footer"
 
-const StyledPodcast = styled.main`
-  position: relative;
-  .content {
-    height: 100vh;
-  }
-  .hero {
-    overflow: hidden;
-  }
-  .hero h1 {
-    position: relative;
-    font-size: 6rem;
-    font-weight: 700;
-    line-height: 1;
-    z-index: 1;
-  }
-  .hero ${Container} {
-    position: relative;
-    min-height: 90vh;
-    padding-top: 10rem;
-    padding-bottom: 4rem;
-    display: grid;
-    grid-template-columns: min-content auto;
-  }
-  .hero__image {
-    position: absolute;
-    grid-column: 2;
-    bottom: 0;
-    left: 0;
-    border-radius: 50%;
-    width: 60vw;
-    height: 60vw;
-    min-width: 40rem;
-    min-height: 40rem;
-    object-fit: cover;
-  }
-  .hero__description {
-    position: relative;
-    padding: 2rem;
-    margin-left: -2rem;
-    background: ${colors.grey_100};
-    grid-column: 1;
-    z-index: 1;
-  }
-  .episodes {
-    margin-top: 4rem;
-  }
-`
-
 async function getInitialProps() {
   try {
     const {
@@ -102,6 +54,87 @@ async function getInitialProps() {
   }
 }
 
+const StyledPodcast = styled.main`
+  position: relative;
+  .content {
+    height: 100vh;
+  }
+  .hero {
+    overflow: hidden;
+  }
+  .hero h1 {
+    position: relative;
+    font-size: 6rem;
+    font-weight: 700;
+    line-height: 1;
+    z-index: 1;
+  }
+  .hero ${Container} {
+    position: relative;
+    min-height: 90vh;
+    padding-top: 10rem;
+    padding-bottom: 4rem;
+    display: grid;
+    grid-template-columns: min-content auto;
+  }
+  .hero__image {
+    position: absolute;
+    grid-column: 2;
+    bottom: 0;
+    left: 0;
+    border-radius: 50%;
+    width: 60vw;
+    height: 60vw;
+    min-width: 40rem;
+    min-height: 40rem;
+    object-fit: cover;
+  }
+  .hero__description {
+    position: relative;
+    padding: 2rem;
+    margin-left: -2rem;
+    background: ${colors.grey_100};
+    grid-column: 1;
+    z-index: 1;
+  }
+  .episodes {
+    margin-top: 4rem;
+  }
+  .episodes__title {
+    margin-bottom: 2rem;
+  }
+  .mention {
+    background: ${colors.grey_300};
+    padding: 2rem;
+    font-style: italic;
+    border-radius: 0.25rem;
+  }
+  .platforms {
+    margin-top: 4rem;
+    background: ${colors.purple_700};
+    color: ${colors.purple_100};
+    a {
+      color: ${colors.grey_100};
+      font-weight: 700;
+      text-decoration: none;
+      &:hover {
+        color: ${colors.purple_500};
+      }
+    }
+    h3 {
+      padding: 4rem 0 0;
+    }
+    .available {
+      list-style: none;
+      display: grid;
+      grid-auto-flow: column;
+      padding: 2rem 0 4rem;
+      gap: 2rem;
+      justify-content: start;
+    }
+  }
+`
+
 const StyledEpisode = styled.article`
   display: grid;
   grid-template-columns: 15rem auto;
@@ -111,10 +144,21 @@ const StyledEpisode = styled.article`
   border-radius: 0.25rem;
   overflow: hidden;
   .episode__cover {
-    width: 100%;
+    position: relative;
+    height: 100%;
+    grid-row: span 2;
+    transition: 100ms;
+    &:hover {
+      filter: blur(4px);
+      &:before {
+        position: absolute;
+        content: "play";
+      }
+    }
   }
   .episode__content {
-    padding: 2rem;
+    padding-top: 2rem;
+    padding-right: 2rem;
     p {
       font-size: 1.334rem;
     }
@@ -130,23 +174,22 @@ const StyledEpisode = styled.article`
 function Episode({ episode: { title, summary, cover, _meta }, idx }) {
   return (
     <StyledEpisode>
-      <img src={cover.url} alt={cover.alt} className="episode__cover" />
+      <Link href={`/ilinformed/${_meta.uid}`}>
+        <img src={cover.url} alt={cover.alt} className="episode__cover" />
+      </Link>
       <section className="episode__content">
         <h4>{(idx + 1).toString().padStart(2, "0")}</h4>
         <h2>{RichText.asText(title)}</h2>
         <section className="summary">
           <RichText render={summary} linkResolver={linkResolver} />
         </section>
-        <Link href={`/ilinformed/${_meta.uid}`}>
-          <a>go to episode</a>
-        </Link>
       </section>
     </StyledEpisode>
   )
 }
 
 export default function Podcast({
-  document: { hero_title, description, episode_list },
+  document: { hero_title, description, episode_list, mentions, platforms },
   error
 }) {
   if (error) return <h1>Something went wrong...</h1>
@@ -171,35 +214,22 @@ export default function Podcast({
         </Container>
       </section>
       <Container className="episodes">
+        <h3 className="episodes__title">Episodes</h3>
         {episode_list.map(({ episode }, idx) => (
           <Episode key={episode._meta.uid} episode={episode} idx={idx} />
         ))}
       </Container>
-      <section className="mentions"></section>
-      <section className="platforms"></section>
-      <Footer className="footer" />
-      {/* <section className="hero">
-        <Container>
-          <img
-            className="hero__logo"
-            src="/images/ilinformed_logo.png"
-            alt="IL Informed | A podcast about Illinois Government"
-          />
-        </Container>
+      <section className="mentions scroll-container">
+        {mentions.map(mention => (
+          <article className="scroll-item mention">
+            <p key={mention.author}>{mention.quote}</p>
+          </article>
+        ))}
+        <article className="scroll-spacer" />
       </section>
-      <section className="description">
+      <section className="platforms">
         <Container>
-          <div className="copy">{RichText.render(description)}</div>
-          <img
-            className="banner"
-            src="/images/podcast_banner.jpg"
-            alt="podcast banner"
-          />
-        </Container>
-      </section>
-      <section className="links">
-        <Container>
-          <h2>Listen</h2>
+          <h3>Find us on your favorite platform.</h3>
           <ul className="available">
             {platforms.map(({ platform_link, platform_name }) => (
               <li key={platform_name} className="link">
@@ -212,7 +242,7 @@ export default function Podcast({
           </ul>
         </Container>
       </section>
-      <Footer /> */}
+      <Footer className="footer" />
     </StyledPodcast>
   )
 }

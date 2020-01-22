@@ -103,4 +103,39 @@ a {
     margin: 1rem 0 0;
   }
 }
+
+.scroll-container {
+  display: flex;
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-left: 2rem;
+  padding-bottom: 2rem;
+  scroll-padding-left: 2rem;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  @media (min-width: 62rem) {
+    padding-left: calc(50vw - 39rem);
+    scroll-padding-left: calc(50vw - 34rem);
+  }
+}
+.scroll-item {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  width: 100%;
+  max-width: 25rem;
+  &:not(:last-of-type) {
+    margin-right: 2rem;
+  }
+}
+.scroll-spacer {
+  width: 1px;
+  flex: 0 0 auto;
+}
 `
