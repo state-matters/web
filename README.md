@@ -23,6 +23,16 @@ Lessons that have a common thread are wrapped up into a `course` this is usually
 
 We're using `next` as a framework on top of react which comes with file based routing out of the box. Each file under the `pages` folder with resolve to a url with the same pattern, `pages/about.js` will resolve to a `/about` url. An index.js will resolve to the folder it's in so the `pages/index.js` is the homepage of the site.
 
+**Current Pages**
+
+1. Index Page - `/`
+2. About Page - `/about`
+3. Subscription Page - `/subscribe`
+4. Lesson Index Page - `/lessons`
+5. Lesson Show Page - `/lessons/[uid]`
+6. Ilinformed Index Page - `/ilinformed`
+7. Ilinformed Show Page - `/ilinformed/[uid]`
+
 #### \_document.js
 
 This file extends the html that nextjs server renders for us. Here we include any third party js or css files and analytics. It's also responsible for compiling our styled-components into a set of styles that are injected into the `<head/>` of the document.
@@ -36,11 +46,17 @@ This extends the base app file that nextjs generates. Here is where we render co
 Get initial props is how we preload information for the user. This makes page load times super speedy and gives us the added benefit of not having to mess around with state to fetch data. A `getInitialProps` method is **only available on page level components**. It's signature requires an object to be returned.
 
 ```javascript
-Page.getInitalProps = async function() {
-  // sudo code for how we fetch documents from our CMS.
-  // Prismic is covered in more detail below.
-  const api = await Prismic.api("https://cms.io")
-  const document = await api.getSingle("page")
+Page.getInitialProps = async function() {
+  const { data: document } = await client.query({
+    query: gql`
+      {
+        page(uid: "home-page", lang: "en-us") {
+          title
+          description
+        }
+      }
+    `
+  })
   return { document, color: "green" }
 }
 ```
@@ -77,27 +93,26 @@ const StyledPage = styled.main`
 
 ### Prismic
 
-Prismic is a headless cms. The team has built a library of helper functions for react apps that we're using along with their basic javascript package.
+Prismic is a headless cms that uses [GraphQL](https://graphql.org/). The team has built a library of helper functions for react apps that we're using.
 
-`prismic-javascript prismic-react`
+When the app is bootstrapped, we create an Apollo client in `prismic.js` and export that for usage across the app.
 
-I mentioned above that the code was sudo-code but it's not far off from what we actually do.
+```js
+import client from "prismic-client"
+import { gql } from "@apollo/client"
 
-```url
-# Base URL
-https://statematters.cdn.prismic.io/api/v2
-```
-
-The above url will only return published documents. If you're wanting to build a preview site for members of State Matters you'll need to reach out to an admin of this org.
-
-```javascript
-// here we get the most current version of the api
-const api = await Prismic.api(apiUrl)
-// and then we simply call for a single page and await a document in return.
-// this document will be an object with all the fields the content team has filled out.
-const document = await api.getSingle("about_page", {
-  fetchLinks: ["member.name", "member.title"]
+// Simply query our data in whatever way we want.
+const { data } = await client.query({
+  query: gql`
+    {
+      lessons(first: 5) {
+        title
+        body
+        hero_image
+      }
+    }
+  `
 })
 ```
 
-**For further reading on Prismic and all their awesome api's please check out the [official docs](https://prismic.io/docs)**
+**For further reading on Prismic and all their awesome APIs please check out the [official docs](https://prismic.io/docs)**

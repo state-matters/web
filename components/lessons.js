@@ -7,16 +7,15 @@ import Container from "components/container"
 
 export default function Lessons({ lessons }) {
   const lessonsRef = useRef()
-  console.log("inside lessons", lessons)
   return (
     <StyledLessons>
       <Container>
         <h4 className="section-title">All Lessons</h4>
       </Container>
-      <div className="lessons" ref={lessonsRef}>
+      <div className="lessons scroll-container" ref={lessonsRef}>
         {lessons.map(({ node: lesson }, idx) => {
           return (
-            <div className="lesson" key={lesson._meta.uid}>
+            <div className="lesson scroll-item" key={lesson._meta.uid}>
               <div className="tags">
                 {lesson._meta.tags.map((tag, idx) => (
                   <span key={tag} className="tag">
@@ -34,7 +33,7 @@ export default function Lessons({ lessons }) {
             </div>
           )
         })}
-        <div className="lesson-spacer" />
+        <div className="scroll-spacer" />
       </div>
       <Container className="slider-buttons">
         <span
@@ -60,32 +59,7 @@ const StyledLessons = styled.section`
     margin: 6rem 0 2rem;
     color: ${colors.grey_700};
   }
-  .lessons {
-    display: flex;
-    display: flex;
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding-left: 2rem;
-    padding-bottom: 2rem;
-    scroll-padding-left: 2rem;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    -ms-overflow-style: -ms-autohiding-scrollbar;
-    &::-webkit-scrollbar {
-      display: none;
-    }
-    @media (min-width: 62rem) {
-      padding-left: calc(50vw - 39rem);
-      scroll-padding-left: calc(50vw - 34rem);
-    }
-  }
   .lesson {
-    display: flex;
-    flex-direction: column;
-    flex: 0 0 auto;
-    scroll-snap-align: start;
-    width: 100%;
-    max-width: 25rem;
     background: ${colors.grey_300};
     padding: 2rem;
     border-radius: 4px;
@@ -110,10 +84,6 @@ const StyledLessons = styled.section`
     &:not(:last-of-type) {
       margin-right: 1rem;
     }
-  }
-  .lesson-spacer {
-    width: 1px;
-    flex: 0 0 auto;
   }
   .slider-buttons {
     display: flex;
