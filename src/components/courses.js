@@ -1,17 +1,20 @@
 import React from "react"
 import styled from "styled-components"
-import { colors } from "constants"
+import { colors } from "@constants"
 import { RichText } from "prismic-reactjs"
 import Link from "next/link"
-import Author from "components/author"
-import Container from "components/container"
+import Author from "@components/author"
+import Container from "@components/container"
 
 const Courses = ({ courses }) => (
   <StyledCourses>
     <Container>
       <h4 className="title">Courses</h4>
       {courses.map((course, i) => (
-        <Link key={i} href={{ pathname: "/course", query: { id: course.course.id } }}>
+        <Link
+          key={i}
+          href={{ pathname: "/course", query: { id: course.course.id } }}
+        >
           <Course url={course.cover_photo.url}>
             {RichText.render(course.title)}
             <h4>12 Lessons</h4>
@@ -45,7 +48,11 @@ const Course = styled.div`
     right: 0;
     bottom: 0;
     width: 20rem;
-    background-image: linear-gradient(97.5deg, rgba(255, 217, 205, 1) 15%, rgba(255, 217, 205, 0)),
+    background-image: linear-gradient(
+        97.5deg,
+        rgba(255, 217, 205, 1) 15%,
+        rgba(255, 217, 205, 0)
+      ),
       url(${({ url }) => url});
     background-size: cover;
     background-position: center;

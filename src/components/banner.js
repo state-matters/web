@@ -1,10 +1,10 @@
 import React from "react"
 import styled from "styled-components"
-import { colors } from "constants"
+import { colors } from "@constants"
 import Card from "@statematters/components/card"
 import { RichText } from "prismic-reactjs"
 import { useSpring, animated, config } from "react-spring"
-import Link from "components/link"
+import Link from "@components/link"
 
 const StyledBanner = styled(animated(Card))`
   margin-top: -10rem;
@@ -41,7 +41,7 @@ export default function Banner({ title, photo, body }) {
   const spring = useSpring({
     from: { opacity: 0, transform: "scale(1.1)" },
     opacity: 1,
-    transform: "scale(1)"
+    transform: "scale(1)",
   })
   return (
     <StyledBanner padding={0} style={spring}>

@@ -1,7 +1,7 @@
 import React from "react"
 import Link from "next/link"
 import styled from "styled-components"
-import { colors } from "constants"
+import { colors } from "@constants"
 
 const StyledFooter = styled.footer`
   display: grid;

@@ -1,5 +1,5 @@
 import NextLink from "next/link"
-import { linkResolver } from "constants"
+import { linkResolver } from "@constants"
 
 export default function Link(type, element, content, children, index) {
   return (

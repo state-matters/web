@@ -4,12 +4,12 @@ import { RichText } from "prismic-reactjs"
 import { useSpring, animated, useChain } from "react-spring"
 import Link from "next/link"
 import Head from "next/head"
-import { colors } from "constants"
-import Banner from "components/banner"
-import Lessons from "components/lessons"
-import FeaturedLessons from "components/featured-lessons"
-import Footer from "components/footer"
-import Container from "components/container"
+import { colors } from "@constants"
+import Banner from "@components/banner"
+import Lessons from "@components/lessons"
+import FeaturedLessons from "@components/featured-lessons"
+import Footer from "@components/footer"
+import Container from "@components/container"
 import client from "prismic-client"
 import { gql } from "@apollo/client"
 
@@ -86,7 +86,7 @@ async function getInitialProps() {
             }
           }
         }
-      `
+      `,
     })
     return { response: data, error: null }
   } catch (error) {
@@ -98,9 +98,9 @@ async function getInitialProps() {
 const Homepage = ({
   response: {
     home,
-    allLessons: { edges: lessons }
+    allLessons: { edges: lessons },
   },
-  error
+  error,
 }) => {
   const backgroundRef = useRef()
   const contentRef = useRef()
@@ -108,13 +108,13 @@ const Homepage = ({
     from: { top: "0%", transform: "rotate(0deg)" },
     top: "90%",
     transform: "rotate(3deg)",
-    ref: backgroundRef
+    ref: backgroundRef,
   })
   const contentSpring = useSpring({
     from: { opacity: 0, transform: "scale(1.1)" },
     opacity: 1,
     transform: "scale(1)",
-    ref: contentRef
+    ref: contentRef,
   })
   useChain([backgroundRef, contentRef])
   return (

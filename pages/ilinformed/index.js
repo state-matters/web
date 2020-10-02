@@ -1,17 +1,17 @@
 import styled from "styled-components"
-import { colors, linkResolver } from "constants"
+import { colors, linkResolver } from "@constants"
 import { RichText } from "prismic-reactjs"
 import client from "prismic-client"
 import { gql } from "@apollo/client"
 import Link from "next/link"
-import MetaTags from "components/meta-tags"
-import Container from "components/container"
-import Footer from "components/footer"
+import MetaTags from "@components/meta-tags"
+import Container from "@components/container"
+import Footer from "@components/footer"
 
 async function getInitialProps() {
   try {
     const {
-      data: { podcast: document }
+      data: { podcast: document },
     } = await client.query({
       query: gql`
         query {
@@ -46,7 +46,7 @@ async function getInitialProps() {
             }
           }
         }
-      `
+      `,
     })
     return { document }
   } catch (error) {
@@ -190,7 +190,7 @@ function Episode({ episode: { title, summary, cover, _meta }, idx }) {
 
 export default function Podcast({
   document: { hero_title, description, episode_list, mentions, platforms },
-  error
+  error,
 }) {
   if (error) return <h1>Something went wrong...</h1>
   return (
@@ -220,7 +220,7 @@ export default function Podcast({
         ))}
       </Container>
       <section className="mentions scroll-container">
-        {mentions.map(mention => (
+        {mentions.map((mention) => (
           <article className="scroll-item mention">
             <p key={mention.author}>{mention.quote}</p>
           </article>

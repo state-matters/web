@@ -1,11 +1,11 @@
 import React, { forwardRef, useState, useEffect } from "react"
 import styled, { css } from "styled-components"
-import { colors } from "constants"
+import { colors } from "@constants"
 
 const Input = forwardRef(
   ({ className, value, onChange, label, initialValue, ...props }, ref) => {
     const [hasValue, setHasValue] = useState(initialValue)
-    const handleChange = e => {
+    const handleChange = (e) => {
       if (onChange) onChange(e)
       if (e.target.value.length) setHasValue(true)
       else setHasValue(false)
@@ -25,7 +25,7 @@ const Input = forwardRef(
         <span className="label">{label}</span>
       </Label>
     )
-  }
+  },
 )
 
 const labelMixin = css`

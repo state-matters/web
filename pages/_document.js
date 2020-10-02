@@ -1,6 +1,6 @@
 import { default as NextDoc, Head, Main, NextScript } from "next/document"
 import { ServerStyleSheet } from "styled-components"
-import { colors } from "constants"
+import { colors } from "@constants"
 
 export default class Document extends NextDoc {
   static async getInitialProps(context) {
@@ -9,12 +9,13 @@ export default class Document extends NextDoc {
     try {
       context.renderPage = () =>
         originalRender({
-          enhanceApp: App => props => sheet.collectStyles(<App {...props} />)
+          enhanceApp: (App) => (props) =>
+            sheet.collectStyles(<App {...props} />),
         })
       const initialProps = await NextDoc.getInitialProps(context)
       return {
         ...initialProps,
-        styles: sheet.getStyleElement()
+        styles: sheet.getStyleElement(),
       }
     } finally {
       sheet.seal()
@@ -27,9 +28,23 @@ export default class Document extends NextDoc {
           <meta charSet="utf-8" />
           <meta name="theme-color" content={colors.orange_500} />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-192.png" />
-          <link rel="icon" type="image/png" sizes="32x32" href="/icons/icon-32.png" />
-          <link rel="icon" type="image/png" sizes="16x16" href="/icons/icon-16.png" />
+          <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/icons/icon-192.png"
+          />
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/icons/icon-32.png"
+          />
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/icons/icon-16.png"
+          />
           <link rel="manifest" href="/manifest.json" />
           {this.props.styles}
           <link

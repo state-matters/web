@@ -1,14 +1,14 @@
 import styled from "styled-components"
-import { colors, apiUrl } from "constants"
+import { colors, apiUrl } from "@constants"
 import Prismic from "prismic-javascript"
 import { RichText } from "prismic-reactjs"
-import Footer from "components/footer"
-import Container from "components/container"
+import Footer from "@components/footer"
+import Container from "@components/container"
 
 const About = ({
   document: {
-    data: { about_us, vision, team, advisory_board }
-  }
+    data: { about_us, vision, team, advisory_board },
+  },
 }) => (
   <StyledAbout>
     <section className="about-us">
@@ -42,7 +42,7 @@ const About = ({
       <Container>
         <h2>Advisory Board</h2>
         <div className="advisory__members">
-          {advisory_board.map(member => (
+          {advisory_board.map((member) => (
             <div className="board-member">
               <h3>{member.name}</h3>
               <div className="blurb">{RichText.render(member.blurb)}</div>
@@ -59,7 +59,7 @@ About.getInitialProps = async () => {
   try {
     const api = await Prismic.api(apiUrl)
     const document = await api.getSingle("about_page", {
-      fetchLinks: ["member.name", "member.title"]
+      fetchLinks: ["member.name", "member.title"],
     })
     return { document }
   } catch (error) {

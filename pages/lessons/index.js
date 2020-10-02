@@ -1,6 +1,6 @@
 import styled from "styled-components"
-import { apiUrl, colors } from "constants"
-import Container from "components/container"
+import { apiUrl, colors } from "@constants"
+import Container from "@components/container"
 
 export default function Lessons() {
   return (

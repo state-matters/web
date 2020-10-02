@@ -2,10 +2,10 @@ import React, { useEffect } from "react"
 import styled from "styled-components"
 import Link from "next/link"
 import { useRouter } from "next/router"
-import { colors } from "constants"
+import { colors } from "@constants"
 import Button from "@statematters/components/button"
-import Logo from "components/logo"
-import Container from "components/container"
+import Logo from "@components/logo"
+import Container from "@components/container"
 
 const StyledHeader = styled.header`
   position: absolute;

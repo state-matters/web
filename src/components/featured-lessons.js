@@ -1,9 +1,9 @@
 import React from "react"
 import styled from "styled-components"
-import { colors } from "constants"
+import { colors } from "@constants"
 import { RichText } from "prismic-reactjs"
 import NextLink from "next/link"
-import Container from "components/container"
+import Container from "@components/container"
 
 export default function FeaturedLessons({ featuredLessons }) {
   return (

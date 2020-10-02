@@ -1,14 +1,12 @@
 import styled from "styled-components"
-import { apiUrl, colors } from "constants"
+import { apiUrl, colors } from "@constants"
 import Prismic from "prismic-javascript"
 import { RichText } from "prismic-reactjs"
-import MetaTags from "components/meta-tags"
-import Container from "components/container"
+import MetaTags from "@components/meta-tags"
+import Container from "@components/container"
 
 const Lesson = ({ document: { data }, uid }) => {
-  const description = RichText.asText(data.body)
-    .substring(0, 250)
-    .concat("...")
+  const description = RichText.asText(data.body).substring(0, 250).concat("...")
   return (
     <Page>
       <MetaTags
@@ -25,7 +23,11 @@ const Lesson = ({ document: { data }, uid }) => {
             dangerouslySetInnerHTML={{ __html: data.lesson_video.html }}
           />
         ) : (
-          <img src={data.poster.url} alt={data.poster.alt} className="lesson__poster" />
+          <img
+            src={data.poster.url}
+            alt={data.poster.alt}
+            className="lesson__poster"
+          />
         )}
         <section className="lesson__body">{RichText.render(data.body)}</section>
         <ul className="social">
@@ -45,9 +47,7 @@ const Lesson = ({ document: { data }, uid }) => {
           <li>
             <a
               className="mdi mdi-linkedin"
-              href={`https://www.linkedin.com/shareArticle?mini=true&url=https://www.statematters.org/lesson/${uid}&title=${
-                data.title
-              }&summary=${description}`}
+              href={`https://www.linkedin.com/shareArticle?mini=true&url=https://www.statematters.org/lesson/${uid}&title=${data.title}&summary=${description}`}
             />
           </li>
         </ul>

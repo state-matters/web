@@ -1,8 +1,8 @@
 import React, { Fragment, useRef, useEffect } from "react"
 import { useRouter } from "next/router"
 import analytics from "react-ga"
-import BaseStyles from "components/base-styles"
-import Header from "components/header"
+import BaseStyles from "@components/base-styles"
+import Header from "@components/header"
 
 function usePageTracker(id, pathname) {
   useEffect(() => {
@@ -38,7 +38,7 @@ export default function App({ Component, pageProps }) {
       funraise.current = new Funraise({
         id: "63aac56b-8b04-4fe9-aa94-b7a51e8bcd14:4345",
         isPopup: true,
-        useDefaultButton: false
+        useDefaultButton: false,
       })
       funraise.current.init()
     }

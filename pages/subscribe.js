@@ -1,10 +1,10 @@
 import { useReducer } from "react"
 import styled from "styled-components"
-import { colors } from "constants"
+import { colors } from "@constants"
 import axios from "axios"
-import Container from "components/container"
+import Container from "@components/container"
 import Button from "@statematters/components/button"
-import Input from "components/input"
+import Input from "@components/input"
 
 function reducer(state, action) {
   switch (action.type) {
@@ -18,7 +18,7 @@ function reducer(state, action) {
         firstName: "",
         lastName: "",
         email: "",
-        error: action.error
+        error: action.error,
       }
     case "remove_success":
       return { ...state, subscribed: false }
@@ -31,21 +31,21 @@ const intialState = {
   firstName: "",
   lastName: "",
   email: "",
-  subscribed: false
+  subscribed: false,
 }
 
 export default function Subscribe() {
   const [{ firstName, lastName, email, subscribed }, dispatch] = useReducer(
     reducer,
-    intialState
+    intialState,
   )
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     try {
       await axios.post("/api/subscribe", {
         first: firstName,
         last: lastName,
-        email
+        email,
       })
       dispatch({ type: "subscribed" })
       setTimeout(() => {
@@ -75,11 +75,11 @@ export default function Subscribe() {
             className="sub__input"
             label="First name"
             value={firstName}
-            onChange={e =>
+            onChange={(e) =>
               dispatch({
                 type: "handle_change",
                 name: "firstName",
-                value: e.target.value
+                value: e.target.value,
               })
             }
           />
@@ -88,11 +88,11 @@ export default function Subscribe() {
             className="sub__input"
             label="Last name"
             value={lastName}
-            onChange={e =>
+            onChange={(e) =>
               dispatch({
                 type: "handle_change",
                 name: "lastName",
-                value: e.target.value
+                value: e.target.value,
               })
             }
           />
@@ -101,11 +101,11 @@ export default function Subscribe() {
             className="sub__input sub__input--email"
             label="Email address"
             value={email}
-            onChange={e =>
+            onChange={(e) =>
               dispatch({
                 type: "handle_change",
                 name: "email",
-                value: e.target.value
+                value: e.target.value,
               })
             }
           />

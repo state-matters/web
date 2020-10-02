@@ -1,14 +1,14 @@
 import { useState, useLayoutEffect } from "react"
 import styled from "styled-components"
-import { apiUrl, colors } from "constants"
+import { apiUrl, colors } from "@constants"
 import Prismic from "prismic-javascript"
 import { RichText } from "prismic-reactjs"
-import Container from "components/container"
+import Container from "@components/container"
 import clsx from "clsx"
 
 const Course = ({ course, lessons }) => {
   const [activeLesson, setActive] = useState(null)
-  const handleLessonChange = id => {
+  const handleLessonChange = (id) => {
     setActive(id)
     localStorage.setItem(course.id, id)
   }
@@ -29,7 +29,8 @@ const Course = ({ course, lessons }) => {
               <div
                 className="inner"
                 dangerouslySetInnerHTML={{
-                  __html: lessons.find(l => l.id === activeLesson).data.lesson_video.html
+                  __html: lessons.find((l) => l.id === activeLesson).data
+                    .lesson_video.html,
                 }}
               />
             ) : null}
@@ -40,13 +41,16 @@ const Course = ({ course, lessons }) => {
                 <h4>{RichText.asText(course.data.course_title)}</h4>
                 {/* <Toggle label="autoplay" /> */}
               </li>
-              {lessons.map(lesson => {
-                const classes = clsx("lesson", { active: lesson.id === activeLesson })
+              {lessons.map((lesson) => {
+                const classes = clsx("lesson", {
+                  active: lesson.id === activeLesson,
+                })
                 return (
                   <LessonListItem
                     key={lesson.id}
                     className={classes}
-                    onClick={e => handleLessonChange(lesson.id)}>
+                    onClick={(e) => handleLessonChange(lesson.id)}
+                  >
                     {RichText.asText(lesson.data.title)}
                   </LessonListItem>
                 )
@@ -64,7 +68,7 @@ Course.getInitialProps = async ({ query }) => {
     const api = await Prismic.api(apiUrl)
     const course = await api.getByID(query.id)
     const { results: lessons } = await api.getByIDs(
-      course.data.lessons.map(({ lesson }) => lesson.id)
+      course.data.lessons.map(({ lesson }) => lesson.id),
     )
     return { course, lessons }
   } catch (error) {

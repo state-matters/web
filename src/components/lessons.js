@@ -1,9 +1,9 @@
 import React, { useRef } from "react"
 import styled from "styled-components"
-import { colors } from "constants"
+import { colors } from "@constants"
 import NextLink from "next/link"
 import { RichText } from "prismic-reactjs"
-import Container from "components/container"
+import Container from "@components/container"
 
 export default function Lessons({ lessons }) {
   const lessonsRef = useRef()
@@ -38,13 +38,13 @@ export default function Lessons({ lessons }) {
       <Container className="slider-buttons">
         <span
           className="mdi mdi-chevron-left"
-          onClick={e => {
+          onClick={(e) => {
             lessonsRef.current.scrollLeft -= 300
           }}
         />
         <span
           className="mdi mdi-chevron-right"
-          onClick={e => {
+          onClick={(e) => {
             lessonsRef.current.scrollLeft += 300
           }}
         />
