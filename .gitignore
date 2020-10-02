@@ -6,10 +6,7 @@
 
 # NPM Modules
 node_modules
-npm-debug.log
+*-debug.log
 
-# Next Build Folder
+# Build Folder
 .next
-
-# Code Editor Settings
-.vscode
